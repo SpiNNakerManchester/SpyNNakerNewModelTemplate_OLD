@@ -2,10 +2,17 @@ ifndef NEURAL_MODELLING_DIRS
     $(error NEURAL_MODELLING_DIRS is not set.  Please define NEURAL_MODELLING_DIRS (possibly by running "source setup" in the neural_modelling folder within the sPyNNaker source folder))
 endif
 
+# This is used to compute what folder we are currently in
 MAKEFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 CURRENT_DIR := $(dir $(MAKEFILE_PATH))
-EXTRA_SRC_DIR := $(abspath $(CURRENT_DIR))
+
+# This defines the location where the extra sources are coming from
+EXTRA_SRC_DIR := $(abspath $(CURRENT_DIR))/
+
+# This is where the binaries will be built
 APP_OUTPUT_DIR := $(abspath $(CURRENT_DIR)../../python_models/model_binaries/)/
+
+# This add the neural modelling folder as an include folder
 CFLAGS += -I$(NEURAL_MODELLING_DIRS)/src
 
-include $(NEURAL_MODELLING_DIRS)/src/Makefile.common
+include $(NEURAL_MODELLING_DIRS)/src/neuron/builds/Makefile.common

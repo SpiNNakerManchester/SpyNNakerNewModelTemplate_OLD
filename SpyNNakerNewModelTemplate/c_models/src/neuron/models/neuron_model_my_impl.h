@@ -5,7 +5,7 @@
 
 typedef struct neuron_t {
 
-    // Parameters - make sure these match with the python code!
+    // TODO: Parameters - make sure these match with the python code!
 
     // Variable-state parameters e.g. membrane voltage
     REAL V;
@@ -14,13 +14,15 @@ typedef struct neuron_t {
     REAL I_offset;
 
     // Put anything else you want to store per neuron
+    REAL my_parameter;
 
 } neuron_t;
 
 // function that converts the input into the real value to be used by the
 // neuron - this can be used for scaling for example
+// (as is done for conductance)
 inline input_t neuron_model_convert_input(input_t input) {
     return input;
 }
 
-#endif   // _NEURON_MODEL_IZH_CURR_IMPL_H_
+#endif   // _NEURON_MODEL_MY_IMPL_H_

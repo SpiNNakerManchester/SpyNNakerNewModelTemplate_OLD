@@ -22,7 +22,7 @@ bool neuron_model_state_update(input_t exc_input, input_t inh_input,
                                   + external_bias + neuron->I_offset;
 
 
-    // Solve your equation here
+    // TODO: Solve your equation here
 
     // Return true if a spike is generated, or false otherwise
     return false;
@@ -30,10 +30,11 @@ bool neuron_model_state_update(input_t exc_input, input_t inh_input,
 
 state_t neuron_model_get_membrane_voltage(neuron_pointer_t neuron) {
 
-    // Get the state value representing the membrane voltage
+    // TODO: Get the state value representing the membrane voltage
     return neuron->V;
 }
 
-// printout of neuron definition and state variables
 void neuron_model_print(restrict neuron_pointer_t neuron) {
+
+    // TODO: Printout of neuron definition and state variables
 }
