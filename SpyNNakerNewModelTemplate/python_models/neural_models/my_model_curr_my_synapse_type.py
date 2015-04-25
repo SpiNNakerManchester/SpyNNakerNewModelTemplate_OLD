@@ -26,7 +26,7 @@ class MyModelCurrMySynapseType(
     # TODO: edit this to be a unqiue number for your model.
     # This should match the APPLICATION_MAGIC_NUMBER in the Makefile of the C
     # binary.
-    CORE_APP_IDENTIFIER = 0x12345678
+    CORE_APP_IDENTIFIER = 0x12345679
 
     # TODO: Set the maximum number of atoms per core that can be supported.
     # For more complex models, you might need to reduce this number.

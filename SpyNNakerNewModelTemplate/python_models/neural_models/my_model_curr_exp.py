@@ -108,7 +108,7 @@ class MyModelCurrExp(
         """
 
         # TODO: Attempt to guess how many cpu cycles each atom requires here!
-        return 781 * ((vertex_slice.hi_atom - vertex_slice.lo_atom) + 1)
+        return 781 * vertex_slice.n_atoms
 
     def get_parameters(self):
         """
@@ -130,5 +130,7 @@ class MyModelCurrExp(
         """
         return True
 
+    # TODO: Implement any additional abstract methods required by the
+    # inherited classes
     def is_exp_vertex(self):
         return True

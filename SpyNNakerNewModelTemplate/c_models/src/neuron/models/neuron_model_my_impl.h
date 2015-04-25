@@ -5,7 +5,8 @@
 
 typedef struct neuron_t {
 
-    // TODO: Parameters - make sure these match with the python code!
+    // TODO: Parameters - make sure these match with the python code,
+    // including the order of the variables when returned by get_parameters.
 
     // Variable-state parameters e.g. membrane voltage
     REAL V;
@@ -21,6 +22,8 @@ typedef struct neuron_t {
 // function that converts the input into the real value to be used by the
 // neuron - this can be used for scaling for example
 // (as is done for conductance)
+// TODO: Ensure that any scaling requested by the python weight_scale
+// is reversed at this point
 inline input_t neuron_model_convert_input(input_t input) {
     return input;
 }

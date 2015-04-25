@@ -1,4 +1,5 @@
 # This is the name of the application
+# TODO: Ensure this matches the binary in the Python code
 APP = my_model_curr_my_synapse_type
 
 # This is the folder where things will be built (this will be created)
@@ -21,6 +22,7 @@ NEURON_MODEL_H = $(EXTRA_SRC_DIR)/neuron/models/neuron_model_my_impl.h
 SYNAPSE_TYPE_H = $(EXTRA_SRC_DIR)/neuron/synapse_types/synapse_types_my_impl.h
 
 # This is the "MAGIC NUMBER" that should match the Python "CORE_APP_IDENTIFIER"
-APPLICATION_MAGIC_NUMBER = 0x12345678
+# TODO: Ensure that this matches the python CORE_APP_IDENTIFIER
+APPLICATION_MAGIC_NUMBER = 0x12345679
 
 include ../Makefile.common

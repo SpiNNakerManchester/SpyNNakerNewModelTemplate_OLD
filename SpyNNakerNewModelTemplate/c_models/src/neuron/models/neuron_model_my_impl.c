@@ -23,6 +23,7 @@ bool neuron_model_state_update(input_t exc_input, input_t inh_input,
 
 
     // TODO: Solve your equation here
+    neuron->V += input_this_timestep;
 
     // Return true if a spike is generated, or false otherwise
     return false;
