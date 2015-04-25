@@ -40,11 +40,11 @@ Parameters and variables should be 32-bit values (e.g. uint32_t, int32_t, REAL,
 UREAL, FRACT or UFRACT).  This will ensure easy transfer of values between
 C and python code.
 
-In addition, this file also defines the function:  
-```neuron_model_convert_input```  
-This function can be used to scale the input, so long as it matches the python
-```weight_scale``` parameter (see later).  The reason that this might be
-required is that the input is held in a 32-bit fixed point value as follows:
+In addition, this file also defines the function 
+```neuron_model_convert_input``` This function can be used to scale the input, 
+so long as it matches the python ```weight_scale``` parameter (see later).  
+The reason that this might be required is that the input is held in a 32-bit
+fixed point value as follows:
 
 ```|1-bit sign|16-bit integer part|15-bit fractional part|```
 
@@ -65,8 +65,7 @@ matches the C code precisely.
 The first thing to decide here is if the model is to make use of any standard
 components provided by sPyNNaker.  If so, you can add these to the class as
 indicated.  In this example, the model makes use of the exponential synapse
-shaping, and so the model class inherits from
-```AbstractExponentialPopulationVertex```.
+shaping, and so the model class inherits from ```AbstractExponentialPopulationVertex```.
 
 The next thing to define is the ```CORE_APP_IDENTIFIER```.  This is an
 arbitrary identifier that helps to ensure that the correct data is loaded
