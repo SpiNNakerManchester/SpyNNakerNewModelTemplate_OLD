@@ -2,14 +2,11 @@
 
 #include <debug.h>
 
-// machine timestep in msecs
-static REAL machine_timestep = REAL_CONST(1.0);
+static global_neuron_params_pointer_t global_params;
 
-void neuron_model_set_machine_timestep(timer_t microsecs) {
-
-    // Store the machine timestep
-    const double time_step_multiplier = 0.00100;
-    machine_timestep = (REAL) (microsecs * time_step_multiplier);
+void neuron_model_set_global_neuron_params(
+        global_neuron_params_pointer_t params) {
+    global_params = params;
 }
 
 bool neuron_model_state_update(input_t exc_input, input_t inh_input,
@@ -36,6 +33,7 @@ state_t neuron_model_get_membrane_voltage(neuron_pointer_t neuron) {
 }
 
 void neuron_model_print(restrict neuron_pointer_t neuron) {
+    use(neuron);
 
     // TODO: Printout of neuron definition and state variables
 }

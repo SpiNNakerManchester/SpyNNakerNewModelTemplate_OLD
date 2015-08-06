@@ -89,6 +89,7 @@ static inline void synapse_types_shape_input(
 static inline void synapse_types_add_neuron_input(
         input_t *input_buffers, index_t synapse_type_index,
         index_t neuron_index, synapse_param_t** parameters, input_t input) {
+    use(parameters);
 
     // Get the index of the input being added to
     uint32_t input_index = synapse_types_get_input_buffer_index(

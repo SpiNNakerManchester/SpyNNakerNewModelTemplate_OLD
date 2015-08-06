@@ -19,6 +19,13 @@ typedef struct neuron_t {
 
 } neuron_t;
 
+typedef struct global_neuron_params_t {
+
+    // Add any parameters that apply to the whole model here
+    REAL my_parameter;
+
+} global_neuron_params_t;
+
 // function that converts the input into the real value to be used by the
 // neuron - this can be used for scaling for example
 // (as is done for conductance)
