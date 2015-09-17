@@ -52,6 +52,10 @@ class MyModelCurrExp(
             # get_parameters (see below)
             n_params=3,
 
+            # TODO: Replace with the number of parameters to be returned by
+            # get_global_parameters (see below)
+            n_global_params=1,
+
             # TODO: fill in this with the name of the c code binary
             binary="my_model_curr_exp.aplx",
 
