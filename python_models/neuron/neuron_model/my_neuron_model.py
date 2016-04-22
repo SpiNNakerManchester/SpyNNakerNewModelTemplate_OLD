@@ -25,7 +25,6 @@ class MyNeuronModel(AbstractNeuronModel):
         self._my_param_1 = \
             utility_calls.convert_param_to_numpy(my_param_1, n_neurons)
 
-
     def get_n_neural_parameters(self):
         """
         returns the number of parameters used by this model
