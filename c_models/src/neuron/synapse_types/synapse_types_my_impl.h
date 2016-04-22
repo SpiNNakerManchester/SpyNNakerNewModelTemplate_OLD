@@ -32,10 +32,11 @@
 #define SYNAPSE_TYPE_COUNT 2
 
 // TODO: Define the parameters required to compute the synapse shape
-// The number of parameters here should match the number per neuron per
-// synapse written by the python method write_synapse_parameters
+// The number of parameters here should match the number per neuron
+// written by the python method write_synapse_parameters
 typedef struct synapse_param_t {
-    REAL my_synapse_param;
+    REAL my_ex_synapse_param;
+    REAL my_in_synapse_param;
 } synapse_param_t;
 
 // Include this here after defining the above items
@@ -54,27 +55,22 @@ typedef enum input_buffer_regions {
 //! \return nothing
 static inline void synapse_types_shape_input(
         input_t *input_buffers, index_t neuron_index,
-        synapse_param_t** parameters) {
+        synapse_param_t* parameters) {
+
+    // The is the parameters for the neuron synapses
+    synapse_param_t params = parameters[neuron_index];
 
     // Get the index of the excitatory synapse
     uint32_t ex_synapse_index = synapse_types_get_input_buffer_index(
         EXCITATORY, neuron_index);
 
-    // The is the parameter for the excitatory synapse
-    synapse_param_t ex_param = parameters[EXCITATORY][neuron_index];
-
     // Get the index of the inhibitory synapse
     uint32_t in_synapse_index = synapse_types_get_input_buffer_index(
         INHIBITORY, neuron_index);
 
-    // The is the parameter for the excitatory synapse
-    synapse_param_t in_param = parameters[INHIBITORY][neuron_index];
-
-    // TODO: Get any other indices and parameters if more
-
     // TODO: Update the appropriate input buffers
-    input_buffers[ex_synapse_index] *= ex_param.my_synapse_param;
-    input_buffers[in_synapse_index] *= in_param.my_synapse_param;
+    input_buffers[ex_synapse_index] *= params.my_ex_synapse_param;
+    input_buffers[in_synapse_index] *= params.my_in_synapse_param;
 }
 
 //! \brief Adds the initial value to an input buffer for this shaping.  Allows
@@ -88,7 +84,7 @@ static inline void synapse_types_shape_input(
 //! \return None
 static inline void synapse_types_add_neuron_input(
         input_t *input_buffers, index_t synapse_type_index,
-        index_t neuron_index, synapse_param_t** parameters, input_t input) {
+        index_t neuron_index, synapse_param_t* parameters, input_t input) {
     use(parameters);
 
     // Get the index of the input being added to
@@ -159,6 +155,13 @@ static inline void synapse_types_print_input(
     io_printf(
         IO_BUF, "%12.6k - %12.6k",
         input_buffers[ex_synapse_index], input_buffers[in_synapse_index]);
+}
+
+static inline void synapse_types_print_parameters(synapse_param_t *parameters) {
+
+    // TODO: Update to print your parameters
+    log_debug("my ex param = %k\n", parameters->my_ex_synapse_param);
+    log_debug("my in param = %k\n", parameters->my_in_synapse_param);
 }
 
 #endif  // _SYNAPSE_TYPES_MY_IMPL_H_

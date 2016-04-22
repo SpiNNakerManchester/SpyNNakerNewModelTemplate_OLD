@@ -31,8 +31,9 @@ from spynnaker.pyNN.models.neuron.neuron_models.neuron_model_leaky_integrate \
     import NeuronModelLeakyIntegrate
 from spynnaker.pyNN.models.neuron.neuron_models.neuron_model_izh \
     import NeuronModelIzh
+
 # new model template
-from python_models.neuron_components.neuron_model.my_neuron_model \
+from python_models.neuron.neuron_model.my_neuron_model \
     import MyNeuronModel
 
 # TODO: synapse types (all imported for help, only use one)
