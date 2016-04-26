@@ -6,7 +6,8 @@
 typedef struct neuron_t {
 
     // TODO: Parameters - make sure these match with the python code,
-    // including the order of the variables when returned by get_parameters.
+    // including the order of the variables when returned by
+    // get_neural_parameters.
 
     // Variable-state parameters e.g. membrane voltage
     REAL V;
@@ -23,7 +24,8 @@ typedef struct global_neuron_params_t {
 
     // TODO: Add any parameters that apply to the whole model here (i.e. not
     // just to a single neuron)
-    REAL my_global_parameter;
+    // Note: often these are not user supplied, but computed parameters
+    uint32_t machine_time_step;
 
 } global_neuron_params_t;
 

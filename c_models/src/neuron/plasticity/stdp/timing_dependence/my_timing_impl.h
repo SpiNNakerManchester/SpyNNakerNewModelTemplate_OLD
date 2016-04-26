@@ -23,8 +23,9 @@ typedef struct pre_trace_t {
 // Include generic plasticity maths functions
 #include <neuron/plasticity/common/maths.h>
 
-// Note the variables will be external
-extern int32_t my_parameter;
+// Note the parameters will be external
+extern accum my_potentiation_parameter;
+extern accum my_depression_parameter;
 
 //---------------------------------------
 // Timing dependence inline functions
@@ -75,11 +76,12 @@ static inline update_state_t timing_apply_pre_spike(
 
     // TODO: Perform depression on pre spikes that occur after the
     // current spike
-    uint32_t time_since_last_post = time - last_post_time;
+    accum time_since_last_post = (accum) (time - last_post_time);
     if (time_since_last_post > 0) {
-        int32_t decayed_o1 = time_since_last_post * my_parameter;
+        int32_t decayed_o1 = (int32_t)
+            (time_since_last_post * my_depression_parameter);
 
-        log_debug("\t\t\ttime_since_last_post=%u, decayed_o1=%d\n",
+        log_debug("\t\t\ttime_since_last_post=%k, decayed_o1=%d\n",
                   time_since_last_post, decayed_o1);
 
         // Apply depression to state (which is a weight_state)
@@ -101,12 +103,13 @@ static inline update_state_t timing_apply_post_spike(
 
     // TODO: Perform potentiation on post spikes that occur after the
     // current spike
-    uint32_t time_since_last_pre = time - last_pre_time;
+    accum time_since_last_pre = (accum) (time - last_pre_time);
     if (time_since_last_pre > 0) {
-        int32_t decayed_r1 = time_since_last_pre * my_parameter;
+        int32_t decayed_r1 = (int32_t)
+            (time_since_last_pre * my_potentiation_parameter);
 
         log_debug(
-            "\t\t\ttime_since_last_pret=%u, decayed_r1=%d\n",
+            "\t\t\ttime_since_last_pre=%k, decayed_r1=%d\n",
             time_since_last_pre, decayed_r1);
 
         // Apply potentiation to state (which is a weight_state)
@@ -116,4 +119,4 @@ static inline update_state_t timing_apply_post_spike(
     }
 }
 
-#endif	// _TIMING_NEAREST_PAIR_IMPL_H_
+#endif	// _MY_TIMING_H_

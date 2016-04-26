@@ -1,5 +1,5 @@
-#ifndef _WEIGHT_ADDITIVE_ONE_TERM_IMPL_H_
-#define _WEIGHT_ADDITIVE_ONE_TERM_IMPL_H_
+#ifndef _MY_WEIGHT_H_
+#define _MY_WEIGHT_H_
 
 // Include generic plasticity maths functions
 #include <neuron/plasticity/common/maths.h>
@@ -104,4 +104,4 @@ static inline weight_t weight_get_final(weight_state_t new_state) {
     return (weight_t) new_weight;
 }
 
-#endif // _WEIGHT_ADDITIVE_ONE_TERM_IMPL_H_
+#endif // _MY_WEIGHT_H_

@@ -8,21 +8,32 @@ from data_specification.enums.data_type import DataType
 
 
 class MyAdditionalInput(AbstractAdditionalInput):
-    """ Represents a possible additional independent input for a model
-    """
 
     def __init__(
             self, n_neurons,
 
             # TODO: update the parameters
-            my_param1):
+            my_additional_input_parameter):
 
         AbstractAdditionalInput.__init__(self)
         self._n_neurons = n_neurons
 
-        # TODO: update the set of converts to reflect the parameters inputted
-        self._param1 = utility_calls.convert_param_to_numpy(
-            my_param1, n_neurons)
+        # TODO: store the parameters
+        self._my_additional_input_parameter = \
+            utility_calls.convert_param_to_numpy(
+                my_additional_input_parameter, n_neurons)
+
+    # TODO: Add getters and setters for the parameters
+
+    @property
+    def my_additional_input_parameter(self):
+        return self._my_parameter
+
+    @my_additional_input_parameter.setter
+    def my_additional_input_parameter(self, my_additional_input_parameter):
+        self._my_additional_input_parameter = \
+            utility_calls.convert_param_to_numpy(
+                my_additional_input_parameter, self._n_neurons)
 
     def get_n_parameters(self):
         """ Get the number of parameters for the additional input
@@ -31,7 +42,9 @@ class MyAdditionalInput(AbstractAdditionalInput):
         :rtype: int
         """
         # TODO: update the number of parameters this additional input holds
-        return 1
+        # Note: must match the number in the additional_input_t structure
+        # in the C code
+        return 2
 
     def get_parameters(self):
         """ Get the parameters for the additional input
@@ -40,9 +53,13 @@ class MyAdditionalInput(AbstractAdditionalInput):
         :rtype: array of\
                 :py:class:`spynnaker.pyNN.models.neural_properties.neural_parameter.NeuronParameter`
         """
-        # TODO: need to update this with your parameters.
+        # TODO: update the parameters
+        # Note: must match the order of the additional_input_t structure in
+        # the C code
         return [
-            NeuronParameter(self._param1, DataType.S1615),
+            NeuronParameter(0, DataType.S1615),
+            NeuronParameter(
+                self._my_additional_input_parameter, DataType.S1615),
         ]
 
     def get_n_cpu_cycles_per_neuron(self):
@@ -50,23 +67,6 @@ class MyAdditionalInput(AbstractAdditionalInput):
             additional_input_get_input_value_as_current and\
             additional_input_has_spiked
         """
-        # TODO: need to guess for your model.
+        # TODO: update to reflect the C code
+        # Note: can be guessed to some extent
         return 10
-
-    def get_sdram_usage_per_neuron_in_bytes(self):
-        """ Get the SDRAM usage of this additional input in bytes
-
-        :return: The SDRAM usage
-        :rtype: int
-        """
-        # TODO: need to guess for your model.
-        return self.get_n_input_type_parameters() * 4
-
-    def get_dtcm_usage_per_neuron_in_bytes(self):
-        """ Get the DTCM usage of this additional input in bytes
-
-        :return: The DTCM usage
-        :rtype: int
-        """
-        # TODO: need to guess for your model.
-        return self.get_n_input_type_parameters() * 4
