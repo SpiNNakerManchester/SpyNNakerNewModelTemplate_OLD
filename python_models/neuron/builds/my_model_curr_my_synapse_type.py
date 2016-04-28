@@ -26,7 +26,9 @@ class MyModelCurrMySynapseType(AbstractPopulationVertex):
     def __init__(
             self, n_neurons, machine_time_step, timescale_factor,
             spikes_per_second=None, ring_buffer_sigma=None,
-            incoming_spike_buffer_size=None, constraints=None, label=None,
+            incoming_spike_buffer_size=None,
+            incoming_spike_with_data_buffer_size=None,
+            constraints=None, label=None,
 
             # neuron model parameters
             my_parameter=default_parameters['my_parameter'],
@@ -73,6 +75,8 @@ class MyModelCurrMySynapseType(AbstractPopulationVertex):
             spikes_per_second=spikes_per_second,
             ring_buffer_sigma=ring_buffer_sigma,
             incoming_spike_buffer_size=incoming_spike_buffer_size,
+            incoming_spike_with_data_buffer_size=(
+                incoming_spike_with_data_buffer_size),
 
             max_atoms_per_core=(
                 MyModelCurrMySynapseType._model_based_max_atoms_per_core),
