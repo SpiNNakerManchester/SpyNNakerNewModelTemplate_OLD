@@ -1,3 +1,4 @@
+from pacman.executor.injection_decorator import inject_items
 from spynnaker.pyNN.models.neural_properties.neural_parameter \
     import NeuronParameter
 from spynnaker.pyNN.models.neuron.neuron_models.abstract_neuron_model \
@@ -10,7 +11,7 @@ from data_specification.enums.data_type import DataType
 class MyNeuronModel(AbstractNeuronModel):
 
     def __init__(
-            self, n_neurons, machine_time_step,
+            self, n_neurons,
 
             # TODO: update the parameters
             i_offset, my_neuron_parameter,
@@ -19,7 +20,6 @@ class MyNeuronModel(AbstractNeuronModel):
             v_init=-70.0):
         AbstractNeuronModel.__init__(self)
         self._n_neurons = n_neurons
-        self._machine_time_step = machine_time_step
 
         # TODO: Store any parameters
         self._i_offset = utility_calls.convert_param_to_numpy(
@@ -87,7 +87,8 @@ class MyNeuronModel(AbstractNeuronModel):
         # data structure in the C code
         return 1
 
-    def get_global_parameters(self):
+    @inject_items({"machine_time_step": "MachineTimeStep"})
+    def get_global_parameters(self, machine_time_step):
 
         # TODO: update to match the global parameters
         # Note: This must match the order of the parameters in the
@@ -95,7 +96,7 @@ class MyNeuronModel(AbstractNeuronModel):
         return [
 
             # uint32_t machine_time_step
-            NeuronParameter(self._machine_time_step, DataType.UINT32)
+            NeuronParameter(machine_time_step, DataType.UINT32)
         ]
 
     def get_n_cpu_cycles_per_neuron(self):

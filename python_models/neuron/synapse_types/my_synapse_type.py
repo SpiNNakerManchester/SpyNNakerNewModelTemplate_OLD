@@ -9,7 +9,7 @@ from data_specification.enums.data_type import DataType
 
 class MySynapseType(AbstractSynapseType):
 
-    def __init__(self, n_neurons, machine_time_step,
+    def __init__(self, n_neurons,
 
                  # TODO: update the parameters
                  my_ex_synapse_parameter=0.1,
@@ -19,7 +19,6 @@ class MySynapseType(AbstractSynapseType):
         self._n_neurons = n_neurons
 
         # TODO: Store the parameters
-        self._machine_time_step = machine_time_step
         self._my_ex_synapse_parameter = utility_calls.convert_param_to_numpy(
             my_ex_synapse_parameter, n_neurons)
         self._my_in_synapse_parameter = utility_calls.convert_param_to_numpy(
