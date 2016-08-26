@@ -142,3 +142,5 @@ create_v_graph(
 create_v_graph(
     my_model_my_threshold_pop, "My Model with My Threshold")
 pylab.show()
+
+p.end()
