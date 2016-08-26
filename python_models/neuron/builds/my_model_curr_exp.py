@@ -64,8 +64,7 @@ class MyModelCurrExp(AbstractPopulationVertex):
         'i_offset': 0, 'my_parameter': -70.0}
 
     def __init__(
-            self, n_neurons, machine_time_step, timescale_factor,
-            spikes_per_second=None, ring_buffer_sigma=None,
+            self, n_neurons, spikes_per_second=None, ring_buffer_sigma=None,
             incoming_spike_buffer_size=None, constraints=None, label=None,
 
             # TODO: neuron model parameters (add / remove as required)
@@ -89,12 +88,12 @@ class MyModelCurrExp(AbstractPopulationVertex):
         # TODO: create your neuron model class (change if required)
         # create your neuron model class
         neuron_model = MyNeuronModel(
-            n_neurons, machine_time_step, i_offset, my_parameter)
+            n_neurons, i_offset, my_parameter)
 
         # TODO: create your synapse type model class (change if required)
         # create your synapse type model
         synapse_type = SynapseTypeExponential(
-            n_neurons, machine_time_step, tau_syn_E, tau_syn_I)
+            n_neurons, tau_syn_E, tau_syn_I)
 
         # TODO: create your input type model class (change if required)
         # create your input type model
@@ -114,8 +113,6 @@ class MyModelCurrExp(AbstractPopulationVertex):
 
             # standard inputs, do not need to change.
             self, n_neurons=n_neurons, label=label,
-            machine_time_step=machine_time_step,
-            timescale_factor=timescale_factor,
             spikes_per_second=spikes_per_second,
             ring_buffer_sigma=ring_buffer_sigma,
             incoming_spike_buffer_size=incoming_spike_buffer_size,
@@ -135,7 +132,13 @@ class MyModelCurrExp(AbstractPopulationVertex):
             binary="my_model_curr_exp.aplx")
 
     @staticmethod
-    def set_model_max_atoms_per_core(new_value):
+    def get_max_atoms_per_core():
+
+        # TODO: Ensure the correct class is used below
+        return MyModelCurrExp._model_based_max_atoms_per_core
+
+    @staticmethod
+    def set_max_atoms_per_core(new_value):
 
         # TODO: Ensure the correct class is used below
         MyModelCurrExp._model_based_max_atoms_per_core = new_value

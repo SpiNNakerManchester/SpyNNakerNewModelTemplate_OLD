@@ -26,8 +26,7 @@ class MyModelCurrExpMyThreshold(AbstractPopulationVertex):
         'threshold_value': -10.0}
 
     def __init__(
-            self, n_neurons, machine_time_step, timescale_factor,
-            spikes_per_second=None, ring_buffer_sigma=None,
+            self, n_neurons, spikes_per_second=None, ring_buffer_sigma=None,
             incoming_spike_buffer_size=None, constraints=None, label=None,
 
             # neuron model parameters
@@ -48,11 +47,11 @@ class MyModelCurrExpMyThreshold(AbstractPopulationVertex):
 
         # create neuron model class
         neuron_model = MyNeuronModel(
-            n_neurons, machine_time_step, i_offset, my_parameter)
+            n_neurons, i_offset, my_parameter)
 
         # create synapse type model
         synapse_type = SynapseTypeExponential(
-            n_neurons, machine_time_step, tau_syn_E, tau_syn_I)
+            n_neurons, tau_syn_E, tau_syn_I)
 
         # create input type model
         input_type = InputTypeCurrent()
@@ -70,8 +69,6 @@ class MyModelCurrExpMyThreshold(AbstractPopulationVertex):
 
             # standard inputs, do not need to change.
             self, n_neurons=n_neurons, label=label,
-            machine_time_step=machine_time_step,
-            timescale_factor=timescale_factor,
             spikes_per_second=spikes_per_second,
             ring_buffer_sigma=ring_buffer_sigma,
             incoming_spike_buffer_size=incoming_spike_buffer_size,
@@ -91,6 +88,11 @@ class MyModelCurrExpMyThreshold(AbstractPopulationVertex):
             binary="my_model_curr_exp_my_threshold.aplx")
 
     @staticmethod
-    def set_model_max_atoms_per_core(new_value):
+    def get_max_atoms_per_core():
+
+        return MyModelCurrExpMyThreshold._model_based_max_atoms_per_core
+
+    @staticmethod
+    def set_max_atoms_per_core(new_value):
 
         MyModelCurrExpMyThreshold._model_based_max_atoms_per_core = new_value
