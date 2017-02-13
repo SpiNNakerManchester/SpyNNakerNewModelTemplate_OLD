@@ -49,98 +49,100 @@ def create_v_graph(population, title):
             pylab.plot([i[1] for i in v_for_neuron],
                        [i[2] for i in v_for_neuron])
 
-p.setup(time_step)
 
-input_pop = p.Population(
-    1, p.SpikeSourceArray, {"spike_times": spike_times}, label="input")
+if __name__ == "__main__":
+    p.setup(time_step)
 
-my_model_pop = p.Population(
-    1, MyModelCurrExp,
-    {
-        "my_parameter": -70.0,
-        "i_offset": i_offset,
-    },
-    label="my_model_pop")
-p.Projection(
-    input_pop, my_model_pop,
-    p.OneToOneConnector(weights=weight))
+    input_pop = p.Population(
+        1, p.SpikeSourceArray, {"spike_times": spike_times}, label="input")
 
-my_model_my_synapse_type_pop = p.Population(
-    1, MyModelCurrMySynapseType,
-    {
-        "my_parameter": -70.0,
-        "i_offset": i_offset,
-        "my_ex_synapse_parameter": 0.5
-    },
-    label="my_model_my_synapse_type_pop")
-p.Projection(
-    input_pop, my_model_my_synapse_type_pop,
-    p.OneToOneConnector(weights=weight))
+    my_model_pop = p.Population(
+        1, MyModelCurrExp,
+        {
+            "my_parameter": -70.0,
+            "i_offset": i_offset,
+        },
+        label="my_model_pop")
+    p.Projection(
+        input_pop, my_model_pop,
+        p.OneToOneConnector(weights=weight))
 
-my_model_my_additional_input_pop = p.Population(
-    1, MyModelCurrExpMyAdditionalInput,
-    {
-        "my_parameter": -70.0,
-        "i_offset": i_offset,
-        "my_additional_input_parameter": 0.05
-    },
-    label="my_model_my_additional_input_pop")
-p.Projection(
-    input_pop, my_model_my_additional_input_pop,
-    p.OneToOneConnector(weights=weight))
+    my_model_my_synapse_type_pop = p.Population(
+        1, MyModelCurrMySynapseType,
+        {
+            "my_parameter": -70.0,
+            "i_offset": i_offset,
+            "my_ex_synapse_parameter": 0.5
+        },
+        label="my_model_my_synapse_type_pop")
+    p.Projection(
+        input_pop, my_model_my_synapse_type_pop,
+        p.OneToOneConnector(weights=weight))
 
-my_model_my_threshold_pop = p.Population(
-    1, MyModelCurrExpMyThreshold,
-    {
-        "my_parameter": -70.0,
-        "i_offset": i_offset,
-        "threshold_value": -10.0,
-        "my_threshold_parameter": 0.4
-    },
-    label="my_model_my_threshold_pop")
-p.Projection(
-    input_pop, my_model_my_threshold_pop,
-    p.OneToOneConnector(weights=weight))
+    my_model_my_additional_input_pop = p.Population(
+        1, MyModelCurrExpMyAdditionalInput,
+        {
+            "my_parameter": -70.0,
+            "i_offset": i_offset,
+            "my_additional_input_parameter": 0.05
+        },
+        label="my_model_my_additional_input_pop")
+    p.Projection(
+        input_pop, my_model_my_additional_input_pop,
+        p.OneToOneConnector(weights=weight))
 
-my_model_stdp_pop = p.Population(
-    1, MyModelCurrExp,
-    {
-        "my_parameter": -70.0,
-        "i_offset": i_offset,
-    },
-    label="my_model_pop")
-stdp = p.STDPMechanism(
-    timing_dependence=MyTimingDependence(
-        my_potentiation_parameter=2.0,
-        my_depression_parameter=0.1),
-    weight_dependence=MyWeightDependence(
-        w_min=0.0, w_max=10.0, my_parameter=0.5),
-    mad=True)
-p.Projection(
-    input_pop, my_model_stdp_pop,
-    p.OneToOneConnector(weights=weight))
-stdp_connection = p.Projection(
-    input_pop, my_model_stdp_pop,
-    p.OneToOneConnector(weights=0),
-    synapse_dynamics=p.SynapseDynamics(slow=stdp))
+    my_model_my_threshold_pop = p.Population(
+        1, MyModelCurrExpMyThreshold,
+        {
+            "my_parameter": -70.0,
+            "i_offset": i_offset,
+            "threshold_value": -10.0,
+            "my_threshold_parameter": 0.4
+        },
+        label="my_model_my_threshold_pop")
+    p.Projection(
+        input_pop, my_model_my_threshold_pop,
+        p.OneToOneConnector(weights=weight))
 
-my_model_pop.record_v()
-my_model_my_synapse_type_pop.record_v()
-my_model_my_additional_input_pop.record_v()
-my_model_my_threshold_pop.record_v()
+    my_model_stdp_pop = p.Population(
+        1, MyModelCurrExp,
+        {
+            "my_parameter": -70.0,
+            "i_offset": i_offset,
+        },
+        label="my_model_pop")
+    stdp = p.STDPMechanism(
+        timing_dependence=MyTimingDependence(
+            my_potentiation_parameter=2.0,
+            my_depression_parameter=0.1),
+        weight_dependence=MyWeightDependence(
+            w_min=0.0, w_max=10.0, my_parameter=0.5),
+        mad=True)
+    p.Projection(
+        input_pop, my_model_stdp_pop,
+        p.OneToOneConnector(weights=weight))
+    stdp_connection = p.Projection(
+        input_pop, my_model_stdp_pop,
+        p.OneToOneConnector(weights=0),
+        synapse_dynamics=p.SynapseDynamics(slow=stdp))
 
-p.run(run_time)
+    my_model_pop.record_v()
+    my_model_my_synapse_type_pop.record_v()
+    my_model_my_additional_input_pop.record_v()
+    my_model_my_threshold_pop.record_v()
 
-print stdp_connection.getWeights()
+    p.run(run_time)
 
-create_v_graph(
-    my_model_pop, "My Model")
-create_v_graph(
-    my_model_my_synapse_type_pop, "My Model with My Synapse Type")
-create_v_graph(
-    my_model_my_additional_input_pop, "My Model with My Additional Input")
-create_v_graph(
-    my_model_my_threshold_pop, "My Model with My Threshold")
-pylab.show()
+    print stdp_connection.getWeights()
 
-p.end()
+    create_v_graph(
+        my_model_pop, "My Model")
+    create_v_graph(
+        my_model_my_synapse_type_pop, "My Model with My Synapse Type")
+    create_v_graph(
+        my_model_my_additional_input_pop, "My Model with My Additional Input")
+    create_v_graph(
+        my_model_my_threshold_pop, "My Model with My Threshold")
+    pylab.show()
+
+    p.end()
