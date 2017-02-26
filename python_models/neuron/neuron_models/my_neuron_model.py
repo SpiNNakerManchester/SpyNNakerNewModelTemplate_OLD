@@ -85,7 +85,7 @@ class MyNeuronModel(AbstractNeuronModel):
         # TODO: update to match the number of global parameters
         # Note: This must match the number of parameters in the global_neuron_t
         # data structure in the C code
-        return 1
+        return 3
 
     @inject_items({"machine_time_step": "MachineTimeStep"})
     def get_global_parameters(self, machine_time_step):
