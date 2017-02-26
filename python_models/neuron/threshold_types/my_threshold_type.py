@@ -48,7 +48,7 @@ class MyThresholdType(AbstractThresholdType):
         # TODO: update to return the number of parameters
         # Note: This must match the number of values in the threshold_type_t
         # data structure in the C code
-        return 1
+        return 2
 
     def get_threshold_parameters(self):
 
