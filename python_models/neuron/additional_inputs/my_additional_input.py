@@ -62,19 +62,6 @@ class MyAdditionalInput(AbstractAdditionalInput):
                 self._my_additional_input_parameter, DataType.S1615),
         ]
 
-    def set_parameters(self, parameters, vertex_slice):
-        """ Set the parameters for the additional input
-
-        :param parameters: The parameters as a numpy array of arrays
-        :param vertex_slice: The neurons to set
-        """
-
-        # TODO: Update with the parameters to match get_parameters ordering
-        # NOTE: parameters[0] is ignored in the below as this is a fixed value
-        #       - see get_parameters[0]
-        self._my_additional_input_parameter[vertex_slice.as_slice] =\
-            parameters[1]
-
     def get_n_cpu_cycles_per_neuron(self):
         """ Get the number of CPU cycles executed by\
             additional_input_get_input_value_as_current and\

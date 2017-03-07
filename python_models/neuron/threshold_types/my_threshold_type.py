@@ -66,11 +66,3 @@ class MyThresholdType(AbstractThresholdType):
         # threshold_type_is_above_threshold
         # Note: This can be guessed
         return 10
-
-    def set_threshold_parameters(self, parameters, vertex_slice):
-
-        # TODO: Update to read the parameters
-        # Note: The order must match get_threshold_parameters
-        utility_calls.set_slice_values(
-            [self._threshold_value, self._my_threshold_parameter],
-            parameters, vertex_slice)

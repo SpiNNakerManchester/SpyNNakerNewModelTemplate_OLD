@@ -107,15 +107,7 @@ class MyNeuronModel(AbstractNeuronModel):
         # Note: This can be a guess
         return 80
 
-    def set_global_parameters(self, parameters):
-        # TODO: update parameters depending on values
-        # Note: The order must match that returned by get_global_parmaeters
-        # Note: Nothing is done in this implementation as the value is fixed
-        pass
-
     def set_neural_parameters(self, neural_parameters, vertex_slice):
         # TODO: update with parameter setters
-        # Note: The order must match that returned by get_parameters
-        utility_calls.set_slice_values(
-            [self._v_init, self._i_offset, self._my_neuron_parameter],
-            neural_parameters, vertex_slice)
+        # Note: Only state variables need to be set
+        self._v_init[vertex_slice.slice] = neural_parameters[0]
