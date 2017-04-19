@@ -61,7 +61,7 @@ class MyNeuronModel(AbstractNeuronModel):
         # TODO: update to match the number of parameters
         # Note: this must match the number of parameters in the neuron_t
         # data structure in the C code
-        return 1
+        return 3
 
     def get_neural_parameters(self):
 
@@ -79,6 +79,11 @@ class MyNeuronModel(AbstractNeuronModel):
             # REAL my_parameter;
             NeuronParameter(self._my_neuron_parameter, DataType.S1615)
         ]
+
+    def get_neural_parameter_types(self):
+
+        # TODO: update to match the parameter types
+        return [item.data_type for item in DataType]
 
     def get_n_global_parameters(self):
 
@@ -98,6 +103,11 @@ class MyNeuronModel(AbstractNeuronModel):
             # uint32_t machine_time_step
             NeuronParameter(machine_time_step, DataType.UINT32)
         ]
+
+    def get_global_parameter_types(self):
+
+        # TODO update to match the global parameter type
+        return [DataType.UINT32]
 
     def get_n_cpu_cycles_per_neuron(self):
 

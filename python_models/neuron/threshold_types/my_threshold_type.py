@@ -48,17 +48,22 @@ class MyThresholdType(AbstractThresholdType):
         # TODO: update to return the number of parameters
         # Note: This must match the number of values in the threshold_type_t
         # data structure in the C code
-        return 1
+        return 2
 
     def get_threshold_parameters(self):
 
-        # TODO: update to the return the parameters
+        # TODO: update to return the parameters
         # Note: The order of the parameters must match the order in the
         # threshold_type_t data structure in the C code
         return [
             NeuronParameter(self._threshold_value, DataType.S1615),
             NeuronParameter(self._my_threshold_parameter, DataType.S1615)
         ]
+
+    def get_threshold_parameter_types(self):
+
+        # TODO: update to return the parameter types
+        return [item.data_type for item in DataType]
 
     def get_n_cpu_cycles_per_neuron(self):
 

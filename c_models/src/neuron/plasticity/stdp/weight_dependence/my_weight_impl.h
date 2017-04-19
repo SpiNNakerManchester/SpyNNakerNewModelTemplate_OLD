@@ -1,6 +1,10 @@
 #ifndef _MY_WEIGHT_H_
 #define _MY_WEIGHT_H_
 
+// These need to be defined before any synapse includes
+#define SYNAPSE_TYPE_BITS 1
+#define SYNAPSE_TYPE_COUNT 2
+
 // Include generic plasticity maths functions
 #include <neuron/plasticity/common/maths.h>
 #include <neuron/plasticity/common/stdp_typedefs.h>
