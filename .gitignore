@@ -6,3 +6,6 @@ application_generated_data_files/
 reports/
 *.pyc
 /REPLACE_WITH_MODULE_NAME.egg-info/
+*DEBUG*
+*egg-info
+
