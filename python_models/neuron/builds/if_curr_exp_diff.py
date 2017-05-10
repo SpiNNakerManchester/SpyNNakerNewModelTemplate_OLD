@@ -23,9 +23,9 @@ class IFCurrExpDiff(AbstractPopulationVertex):
         'v_rest': -65.0,
         'v_reset': -65.0,
         'v_thresh': -50.0,
-        'exc_A_decay': 6,
-        'exc_B_decay': 8,
-        'inh_decay': 5.0,
+        'exc_A_tau': 25,
+        'exc_B_tau': 50.0,
+        'inh_tau': 5.0,
         'tau_refrac': 0.1,
         'i_offset': 0}
 
@@ -36,15 +36,12 @@ class IFCurrExpDiff(AbstractPopulationVertex):
             v_rest=default_parameters['v_rest'],
             v_reset=default_parameters['v_reset'],
             v_thresh=default_parameters['v_thresh'],
-            exc_A_decay=default_parameters['exc_A_decay'],
-            exc_B_decay=default_parameters['exc_B_decay'],
-            inh_decay=default_parameters['inh_decay'],
+            exc_A_tau=default_parameters['exc_A_tau'],
+            exc_B_tau=default_parameters['exc_B_tau'],
+            inh_tau=default_parameters['inh_tau'],
             tau_refrac=default_parameters['tau_refrac'],
             i_offset=default_parameters['i_offset'], v_init=None):
 
-        exc_A_init = 0.0
-        exc_B_init = 0.0
-        inh_init = 0.0
 
         # Construct neuron/synapse objects
         neuron_model = NeuronModelLeakyIntegrateAndFire(
@@ -52,12 +49,9 @@ class IFCurrExpDiff(AbstractPopulationVertex):
             v_reset, tau_refrac)
 
         synapse_type = DiffSynapseType( n_neurons,
-                exc_A_decay,
-                exc_A_init,
-                exc_B_decay,
-                exc_B_init,
-                inh_decay,
-                inh_init)
+                exc_A_tau,
+                exc_B_tau,
+                inh_tau)
 
         # synapse_type = SynapseTypeExponential(
         #     n_neurons, tau_syn_E, tau_syn_I)

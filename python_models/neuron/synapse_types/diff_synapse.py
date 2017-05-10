@@ -33,54 +33,47 @@ class _DIFF_EXP_TYPES(Enum):
 class DiffSynapseType(AbstractSynapseType):
 
     def __init__(self, n_neurons,
-                exc_A_decay=0.1,
-                exc_A_init=0.0,
-                exc_B_decay=0.2,
-                exc_B_init=0.0,
-                inh_decay=0.0,
-                inh_init=0.0):
+                exc_A_tau=0.0,
+                exc_B_tau=0.0,
+                inh_tau=0.0):
 
         AbstractSynapseType.__init__(self)
         self._n_neurons = n_neurons
 
-
-        self._exc_A_decay = utility_calls.convert_param_to_numpy(exc_A_decay, n_neurons)
-        self._exc_A_init = utility_calls.convert_param_to_numpy(exc_A_init, n_neurons)
-        self._exc_B_decay = utility_calls.convert_param_to_numpy(exc_B_decay, n_neurons)
-        self._exc_B_init = utility_calls.convert_param_to_numpy(exc_B_init, n_neurons)
-        self._inh_decay = utility_calls.convert_param_to_numpy(inh_decay, n_neurons)
-        self._inh_init = utility_calls.convert_param_to_numpy(inh_init, n_neurons)
+        self._exc_A_tau = utility_calls.convert_param_to_numpy(exc_A_tau, n_neurons)
+        self._exc_B_tau = utility_calls.convert_param_to_numpy(exc_B_tau, n_neurons)
+        self._inh_tau = utility_calls.convert_param_to_numpy(inh_tau, n_neurons)
 
     @property
-    def exc_A_decay(self):
-        return self._exc_A_decay
+    def exc_A_tau(self):
+        return self._exc_A_tau
 
-    @exc_A_decay.setter
-    def exc_A_decay(self, exc_A_decay):
+    @exc_A_tau.setter
+    def exc_A_tau(self, exc_A_tau):
         self._tau_syn_E = utility_calls.convert_param_to_numpy(
-            exc_A_decay, self._n_neurons)
+            exc_A_tau, self._n_neurons)
 
     @property
-    def exc_B_decay(self):
-        return self._exc_B_decay
+    def exc_B_tau(self):
+        return self._exc_B_tau
 
-    @exc_B_decay.setter
-    def exc_B_decay(self, exc_B_decay):
-        self._exc_B_decay = utility_calls.convert_param_to_numpy(
-            exc_B_decay, self._n_neurons)
+    @exc_B_tau.setter
+    def exc_B_tau(self, exc_B_tau):
+        self._exc_B_tau = utility_calls.convert_param_to_numpy(
+            exc_B_tau, self._n_neurons)
 
     @property
-    def inh_decay(self):
-        return self._inh_decay
+    def inh_tau(self):
+        return self._inh_tau
 
-    @inh_decay.setter
-    def inh_decay(self, inh_decay):
-        self._inh_decay = utility_calls.convert_param_to_numpy(
-            inh_decay, self._n_neurons)
+    @inh_tau.setter
+    def inh_tau(self, inh_tau):
+        self._inh_tau = utility_calls.convert_param_to_numpy(
+            inh_tau, self._n_neurons)
 
 
     def get_n_synapse_types(self):
-        return 3 # EX: A and B; and INH
+        return 4 # EX: ex, A and B; IH: INH
 
     def get_synapse_id_by_target(self, target):
 
@@ -104,11 +97,11 @@ class DiffSynapseType(AbstractSynapseType):
     @inject_items({"machine_time_step": "MachineTimeStep"})
     def get_synapse_type_parameters(self, machine_time_step):
         e_A_decay, e_A_init = get_exponential_decay_and_init(
-            self._exc_A_decay, machine_time_step)
+            self._exc_A_tau, machine_time_step)
         e_B_decay, e_B_init = get_exponential_decay_and_init(
-            self._exc_B_decay, machine_time_step)
+            self._exc_B_tau, machine_time_step)
         i_decay, i_init = get_exponential_decay_and_init(
-            self._inh_decay, machine_time_step)
+            self._inh_tau, machine_time_step)
 
         return [
             NeuronParameter(e_A_decay, _DIFF_EXP_TYPES.E_A_DECAY.data_type),

@@ -87,32 +87,32 @@ static inline void synapse_types_shape_input(input_t *input_buffers,
 	input_buffers[_in_offset(neuron_index)] = decay_s1615(
 			input_buffers[_in_offset(neuron_index)],
 			_in_decay(parameters, neuron_index));
+	log_info("Decay A value: %11.4k, Decay B value: %11.4k", parameters[neuron_index].exc_B_decay, parameters[neuron_index].exc_A_decay);
+
 	input_buffers[_ex_offset(neuron_index)] = input_buffers[_ex_B_offset(
 			neuron_index)] - input_buffers[_ex_A_offset(neuron_index)];
 
-	log_info("shaping comb %11.4k, A %11.4k, B %11.4k", input_buffers[_ex_offset(neuron_index)], input_buffers[_ex_B_offset(
+	/* log_info("shaping comb %11.4k, A %11.4k, B %11.4k", input_buffers[_ex_offset(neuron_index)], input_buffers[_ex_B_offset(
 					neuron_index)], input_buffers[_ex_A_offset(neuron_index)] );
+	*/
 }
 
-// ************
 static inline void synapse_types_add_neuron_input(input_t *input_buffers,
 		index_t synapse_type_index, index_t neuron_index,
 		synapse_param_t* parameters, input_t input) {
 	if (synapse_type_index == EXCITATORY) {
-		//} else if (synapse_type_index == EXCITATORY_A) {
 		uint32_t index = _ex_A_offset(neuron_index);
 		input_buffers[index] = input_buffers[index]
 				+ decay_s1615(input, parameters[neuron_index].exc_A_init);
-	//} else if (synapse_type_index == EXCITATORY_B) {
-		//uint32_t
 		index = _ex_B_offset(neuron_index);
 		input_buffers[index] = input_buffers[index]
 				+ decay_s1615(input, parameters[neuron_index].exc_B_init);
-
+		log_info("init A value: %11.4k, init B value: %11.4k", parameters[neuron_index].exc_B_init, parameters[neuron_index].exc_A_init);
 		input_buffers[_ex_offset(neuron_index)]= input_buffers[_ex_B_offset(neuron_index)] - input_buffers[_ex_A_offset(neuron_index)];
 
-	    log_info("add_neu comb %11.4k, A %11.4k, B %11.4k", input_buffers[_ex_offset(neuron_index)], input_buffers[_ex_B_offset(
+	   /* log_info("add_neu comb %11.4k, A %11.4k, B %11.4k", input_buffers[_ex_offset(neuron_index)], input_buffers[_ex_B_offset(
 				neuron_index)], input_buffers[_ex_A_offset(neuron_index)] );
+		*/
 
 	} else if (synapse_type_index == INHIBITORY) {
 		uint32_t index = _in_offset(neuron_index);
@@ -120,7 +120,6 @@ static inline void synapse_types_add_neuron_input(input_t *input_buffers,
 				+ decay_s1615(input, parameters[neuron_index].inh_init);
 	}
 }
-// ********
 
 /*
  This method is called by the neuron update: calculate difference between the
