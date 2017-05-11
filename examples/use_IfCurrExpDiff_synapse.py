@@ -17,7 +17,7 @@ input_proj = p.Projection(pop_src, pop_ex,
 pop_ex.record()
 pop_ex.record_gsyn()
 pop_ex.record_v()
-p.run(3)
+p.run(100)
 
 v = pop_ex.get_v()
 curr = pop_ex.get_gsyn()
