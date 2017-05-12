@@ -9,6 +9,7 @@ from spynnaker.pyNN.models.neuron.threshold_types.threshold_type_static \
     import ThresholdTypeStatic
 from spynnaker.pyNN.models.neuron.abstract_population_vertex \
     import AbstractPopulationVertex
+import numpy
 
 class IFCurrCombExp(AbstractPopulationVertex):
     """ Leaky integrate and fire neuron with a combined decaying \
@@ -87,6 +88,9 @@ class IFCurrCombExp(AbstractPopulationVertex):
             n_neurons, v_init, v_rest, tau_m, cm, i_offset,
             v_reset, tau_refrac)
 
+
+        exc_a_A, exc_b_B = self.set_excitatory_scalar(exc_a_tau, exc_b_tau)
+
         synapse_type = SynapseTypeCombinedExponential(
                 n_neurons,
 
@@ -131,3 +135,23 @@ class IFCurrCombExp(AbstractPopulationVertex):
     @staticmethod
     def get_max_atoms_per_core():
         return IFCurrCombExp._model_based_max_atoms_per_core
+
+    @staticmethod
+    def calc_rise_time(tau_a, tau_b, A=1, B=-1):
+        try:
+            return numpy.log((A*tau_b) / (-B*tau_a)) * ( (tau_a*tau_b) / (tau_b - tau_a) )
+        except:
+            "calculation failed: ensure A!=B and that they are of opposite sign"
+
+    @classmethod
+    def calc_scalar_f(cls, tau_a, tau_b):
+        t_rise = cls.calc_rise_time(tau_a = tau_a, tau_b=tau_b)
+        return 1/(numpy.exp(-t_rise/tau_a) - numpy.exp(-t_rise/tau_b))
+
+    @classmethod
+    def set_excitatory_scalar(self, exc_a_tau, exc_b_tau):
+        sf = self.calc_scalar_f(tau_a = exc_a_tau, tau_b=exc_b_tau)
+        exc_a_A = sf
+        exc_b_B = -sf
+        return exc_a_A, exc_b_B
+
