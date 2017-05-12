@@ -1,9 +1,9 @@
 import spynnaker7.pyNN as p
 from python_models.neuron.builds.if_curr_comb_exp import IFCurrCombExp
 import plot_utils
-p.setup(1)
+p.setup(0.1)
 
-pop_src = p.Population(1, p.SpikeSourceArray, {'spike_times': [[0]]}, label="src1")
+pop_src = p.Population(1, p.SpikeSourceArray, {'spike_times': [[0, 4]]}, label="src1")
 
 pop_ex = p.Population(1, IFCurrCombExp, {}, label="test")
 #pop_ex = p.Population(1, p.IF_curr_exp, {}, label="test")
@@ -17,7 +17,7 @@ input_proj = p.Projection(pop_src, pop_ex,
 pop_ex.record()
 pop_ex.record_gsyn()
 pop_ex.record_v()
-p.run(100)
+p.run(15)
 
 v = pop_ex.get_v()
 curr = pop_ex.get_gsyn()

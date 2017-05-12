@@ -32,8 +32,17 @@ typedef struct synapse_param_t {
 	decay_t exc_b_init;
 
 	input_t inh_response;
-	decay_t inh_decay;
-	decay_t inh_init;
+
+	input_t inh_a_response;
+	input_t inh_a_A;
+	decay_t inh_a_decay;
+	decay_t inh_a_init;
+
+	input_t inh_b_response;
+	input_t inh_b_B;
+	decay_t inh_b_decay;
+	decay_t inh_b_init;
+
 } synapse_param_t;
 
 #include <neuron/synapse_types/synapse_types.h>
@@ -46,25 +55,31 @@ typedef enum input_buffer_regions {
 
 
 static inline void synapse_types_shape_input(synapse_param_pointer_t parameter){
-	//(input_t *input_buffers, index_t neuron_index, synapse_param_t* parameters) {
-	parameter->exc_a_response =  decay_s1615(
+	// Excitatory
+	parameter->exc_a_response = decay_s1615(
 			parameter->exc_a_response,
 			parameter->exc_a_decay);
-	parameter->exc_b_response = decay_s1615(
+
+	parameter->exc_b_response =  decay_s1615(
 			parameter->exc_b_response,
 			parameter->exc_b_decay);
 
-	parameter->inh_response = decay_s1615(
-			parameter->inh_response,
-			parameter->inh_decay);
+	// Inhibitory
+	parameter->inh_a_response = decay_s1615(
+			parameter->inh_a_response,
+			parameter->inh_a_decay);
 
-	//log_info("Decay A value: %11.4k, Decay B value: %11.4k", parameters[neuron_index].exc_b_decay, parameters[neuron_index].exc_A_decay);
-	parameter->exc_response = parameter->exc_b_response - parameter->exc_a_response;
+	parameter->inh_b_response = decay_s1615(
+			parameter->inh_b_response,
+			parameter->inh_b_decay);
+
+	parameter->exc_response = (parameter->exc_a_A * parameter->exc_a_response) + (parameter->exc_b_B * parameter->exc_b_response);
+	parameter->inh_response = (parameter->inh_a_A * parameter->inh_a_response) + (parameter->inh_b_B * parameter->inh_b_response);
+
+	//	parameter->exc_response = parameter->exc_b_response - parameter->exc_a_response;
+	//	parameter->inh_response = parameter->inh_b_response - parameter->inh_a_response;
 
 
-	/* log_info("shaping comb %11.4k, A %11.4k, B %11.4k", input_buffers[_ex_offset(neuron_index)], input_buffers[_ex_b_offset(
-					neuron_index)], input_buffers[_ex_A_offset(neuron_index)] );
-	*/
 }
 
 static inline void synapse_types_add_neuron_input(
@@ -83,23 +98,22 @@ static inline void synapse_types_add_neuron_input(
 				decay_s1615(input,
 				parameter->exc_b_init);
 
-
-
-		//log_info("init A value: %11.4k, init B value: %11.4k", parameters[neuron_index].exc_b_init, parameters[neuron_index].exc_A_init);
-
-		parameter->exc_response = parameter->exc_b_response - parameter->exc_a_response;
-
-
-		//input_buffers[_ex_offset(neuron_index)]= input_buffers[_ex_b_offset(neuron_index)] - input_buffers[_ex_a_offset(neuron_index)];
-
-	    /* log_info("add_neu comb %11.4k, A %11.4k, B %11.4k", input_buffers[_ex_offset(neuron_index)], input_buffers[_ex_b_offset(
-				neuron_index)], input_buffers[_ex_a_offset(neuron_index)] );
-		*/
+		parameter->exc_response = (parameter->exc_a_A * parameter->exc_a_response) + (parameter->exc_b_B * parameter->exc_b_response);
+		//parameter->exc_response = parameter->exc_b_response - parameter->exc_a_response;
 
 	} else if (synapse_type_index == INHIBITORY) {
-		parameter->inh_response = parameter->inh_response +
+
+		parameter->inh_a_response =  parameter->inh_a_response +
 				decay_s1615(input,
-				parameter->inh_init);
+				parameter->inh_a_init);
+
+		parameter->inh_b_response = parameter->inh_b_response +
+				decay_s1615(input,
+				parameter->inh_b_init);
+
+		parameter->inh_response = (parameter->inh_a_A * parameter->inh_a_response) + (parameter->inh_b_B * parameter->inh_b_response);
+		//parameter->inh_response = parameter->inh_a_response - parameter->inh_b_response;
+
 	}
 }
 
@@ -121,12 +135,6 @@ static inline const char *synapse_types_get_type_char(
 		index_t synapse_type_index) {
 	if (synapse_type_index == EXCITATORY) {
 		return "X";
-    /*
-	} else if (synapse_type_index == EXCITATORY_A) {
-		return "X_A";
-	} else if (synapse_type_index == EXCITATORY_B) {
-		return "X_B";
-		*/
 	} else if (synapse_type_index == INHIBITORY) {
 		return "I";
 	} else {
@@ -142,21 +150,27 @@ static inline void synapse_types_print_input(
         parameter->exc_response,
         parameter->exc_a_response,
         parameter->exc_b_response,
-        parameter->inh_response);
+        parameter->inh_response,
+        parameter->inh_a_response,
+        parameter->inh_b_response);
 }
 
 static inline void synapse_types_print_parameters(synapse_param_pointer_t parameter) {
-    log_debug("-------------------------------------\n");
-	log_debug("exc_response  = %11.4k\n", parameter->exc_response);
-	log_debug("exc_a_decay  = %11.4k\n", parameter->exc_a_decay);
-	log_debug("exc_a_init   = %11.4k\n", parameter->exc_a_init);
-	log_debug("exc_a_response  = %11.4k\n", parameter->exc_a_response);
-	log_debug("exc_b_decay = %11.4k\n", parameter->exc_b_decay);
-	log_debug("exc_b_init  = %11.4k\n", parameter->exc_b_init);
-	log_debug("exc_b_response  = %11.4k\n", parameter->exc_b_response);
-	log_debug("inh_decay  = %11.4k\n", parameter->inh_decay);
-	log_debug("inh_init   = %11.4k\n", parameter->inh_init);
-	log_debug("inh_response  = %11.4k\n", parameter->inh_response);
+    log_info("-------------------------------------\n");
+	log_info("exc_response  = %11.4k\n", parameter->exc_response);
+	log_info("exc_a_decay  = %11.4k\n", parameter->exc_a_decay);
+	log_info("exc_a_init   = %11.4k\n", parameter->exc_a_init);
+	log_info("exc_a_response  = %11.4k\n", parameter->exc_a_response);
+	log_info("exc_b_decay = %11.4k\n", parameter->exc_b_decay);
+	log_info("exc_b_init  = %11.4k\n", parameter->exc_b_init);
+	log_info("exc_b_response  = %11.4k\n", parameter->exc_b_response);
+	log_info("inh_response  = %11.4k\n", parameter->inh_response);
+	log_info("inh_a_decay  = %11.4k\n", parameter->inh_a_decay);
+	log_info("inh_a_init   = %11.4k\n", parameter->inh_a_init);
+	log_info("inh_a_response  = %11.4k\n", parameter->inh_a_response);
+	log_info("inh_b_decay = %11.4k\n", parameter->inh_b_decay);
+	log_info("inh_b_init  = %11.4k\n", parameter->inh_b_init);
+	log_info("inh_b_response  = %11.4k\n", parameter->inh_b_response);
 }
 
 #endif // _DIFF_SYNAPSE_H_

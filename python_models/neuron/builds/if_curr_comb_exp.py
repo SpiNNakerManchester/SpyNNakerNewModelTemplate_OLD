@@ -26,16 +26,23 @@ class IFCurrCombExp(AbstractPopulationVertex):
 
         'exc_response':0,
 
-        'exc_a_response': 1,
+        'exc_a_response':0,
         'exc_a_A':1,
-        'exc_a_tau': 25,
+        'exc_a_tau': 1.7,
 
-        'exc_b_response':1,
-        'exc_b_B':1,
-        'exc_b_tau': 50.0,
+        'exc_b_response':0,
+        'exc_b_B':-1,
+        'exc_b_tau': 0.2,
 
-        'inh_tau': 5.0,
         'inh_response':0,
+
+        'inh_a_response': 0,
+        'inh_a_A':0,
+        'inh_a_tau': 0,
+
+        'inh_b_response':0,
+        'inh_b_B':0,
+        'inh_b_tau': 0,
 
         'tau_refrac': 0.1,
         'i_offset': 0}
@@ -47,6 +54,8 @@ class IFCurrCombExp(AbstractPopulationVertex):
             v_rest=default_parameters['v_rest'],
             v_reset=default_parameters['v_reset'],
             v_thresh=default_parameters['v_thresh'],
+
+
             exc_response=default_parameters['exc_response'],
 
             exc_a_response=default_parameters['exc_a_response'],
@@ -57,8 +66,17 @@ class IFCurrCombExp(AbstractPopulationVertex):
             exc_b_B=default_parameters['exc_b_B'],
             exc_b_tau=default_parameters['exc_b_tau'],
 
+
             inh_response=default_parameters['inh_response'],
-            inh_tau=default_parameters['inh_tau'],
+
+            inh_a_response=default_parameters['inh_a_response'],
+            inh_a_A=default_parameters['inh_a_A'],
+            inh_a_tau=default_parameters['inh_a_tau'],
+
+            inh_b_response=default_parameters['inh_b_response'],
+            inh_b_B=default_parameters['inh_b_B'],
+            inh_b_tau=default_parameters['inh_b_tau'],
+
 
             tau_refrac=default_parameters['tau_refrac'],
             i_offset=default_parameters['i_offset'], v_init=None):
@@ -83,7 +101,14 @@ class IFCurrCombExp(AbstractPopulationVertex):
                 exc_b_tau,
 
                 inh_response,
-                inh_tau)
+
+                inh_a_response,
+                inh_a_A,
+                inh_a_tau,
+
+                inh_b_response,
+                inh_b_B,
+                inh_b_tau)
 
 
         input_type = InputTypeCurrent()
