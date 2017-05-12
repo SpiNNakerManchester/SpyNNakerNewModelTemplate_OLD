@@ -1,11 +1,11 @@
 import spynnaker7.pyNN as p
-from python_models.neuron.builds.if_curr_exp_diff import IFCurrExpDiff
+from python_models.neuron.builds.if_curr_comb_exp import IFCurrCombExp
 import plot_utils
 p.setup(1)
 
 pop_src = p.Population(1, p.SpikeSourceArray, {'spike_times': [[0]]}, label="src1")
 
-pop_ex = p.Population(1, IFCurrExpDiff, {}, label="test")
+pop_ex = p.Population(1, IFCurrCombExp, {}, label="test")
 #pop_ex = p.Population(1, p.IF_curr_exp, {}, label="test")
 
 

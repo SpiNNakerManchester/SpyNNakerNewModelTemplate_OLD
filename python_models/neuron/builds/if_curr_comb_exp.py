@@ -1,8 +1,8 @@
 from spynnaker.pyNN.models.neuron.neuron_models\
     .neuron_model_leaky_integrate_and_fire \
     import NeuronModelLeakyIntegrateAndFire
-from python_models.neuron.synapse_types.diff_synapse \
-    import DiffSynapseType
+from python_models.neuron.synapse_types.synapse_type_combined_exponential\
+    import SynapseTypeCombinedExponential
 from spynnaker.pyNN.models.neuron.input_types.input_type_current \
     import InputTypeCurrent
 from spynnaker.pyNN.models.neuron.threshold_types.threshold_type_static \
@@ -10,9 +10,9 @@ from spynnaker.pyNN.models.neuron.threshold_types.threshold_type_static \
 from spynnaker.pyNN.models.neuron.abstract_population_vertex \
     import AbstractPopulationVertex
 
-class IFCurrExpDiff(AbstractPopulationVertex):
+class IFCurrCombExp(AbstractPopulationVertex):
     """ Leaky integrate and fire neuron with a combined decaying \
-        current inputs: A-B to create humped synaptic input
+        current inputs: synaptic response = Ae^(t/tau_a) + Be^(t/tau_b)
     """
 
     _model_based_max_atoms_per_core = 255
@@ -23,13 +23,20 @@ class IFCurrExpDiff(AbstractPopulationVertex):
         'v_rest': -65.0,
         'v_reset': -65.0,
         'v_thresh': -50.0,
-        'exc_inp_buf_val':0,
-        'exc_A_tau': 25,
-        'exc_A_init_i': 1,
-        'exc_B_tau': 50.0,
-        'exc_B_init_i':1,
+
+        'exc_response':0,
+
+        'exc_a_response': 1,
+        'exc_a_A':1,
+        'exc_a_tau': 25,
+
+        'exc_b_response':1,
+        'exc_b_B':1,
+        'exc_b_tau': 50.0,
+
         'inh_tau': 5.0,
-        'inh_init_i':0,
+        'inh_response':0,
+
         'tau_refrac': 0.1,
         'i_offset': 0}
 
@@ -40,13 +47,19 @@ class IFCurrExpDiff(AbstractPopulationVertex):
             v_rest=default_parameters['v_rest'],
             v_reset=default_parameters['v_reset'],
             v_thresh=default_parameters['v_thresh'],
-            exc_inp_buf_val=default_parameters['exc_inp_buf_val'],
-            exc_A_tau=default_parameters['exc_A_tau'],
-            exc_A_init_i=default_parameters['exc_A_init_i'],
-            exc_B_tau=default_parameters['exc_B_tau'],
-            exc_B_init_i=default_parameters['exc_B_init_i'],
+            exc_response=default_parameters['exc_response'],
+
+            exc_a_response=default_parameters['exc_a_response'],
+            exc_a_A=default_parameters['exc_a_A'],
+            exc_a_tau=default_parameters['exc_a_tau'],
+
+            exc_b_response=default_parameters['exc_b_response'],
+            exc_b_B=default_parameters['exc_b_B'],
+            exc_b_tau=default_parameters['exc_b_tau'],
+
+            inh_response=default_parameters['inh_response'],
             inh_tau=default_parameters['inh_tau'],
-            inh_init_i=default_parameters['inh_init_i'],
+
             tau_refrac=default_parameters['tau_refrac'],
             i_offset=default_parameters['i_offset'], v_init=None):
 
@@ -56,28 +69,33 @@ class IFCurrExpDiff(AbstractPopulationVertex):
             n_neurons, v_init, v_rest, tau_m, cm, i_offset,
             v_reset, tau_refrac)
 
-        synapse_type = DiffSynapseType( n_neurons,
-                exc_inp_buf_val,
-                exc_A_tau,
-                exc_A_init_i,
-                exc_B_tau,
-                exc_B_init_i,
-                inh_tau,
-                inh_init_i)
+        synapse_type = SynapseTypeCombinedExponential(
+                n_neurons,
 
-        # synapse_type = SynapseTypeExponential(
-        #     n_neurons, tau_syn_E, tau_syn_I)
+                exc_response,
+
+                exc_a_response,
+                exc_a_A,
+                exc_a_tau,
+
+                exc_b_response,
+                exc_b_B,
+                exc_b_tau,
+
+                inh_response,
+                inh_tau)
+
 
         input_type = InputTypeCurrent()
         threshold_type = ThresholdTypeStatic(n_neurons, v_thresh)
 
         AbstractPopulationVertex.__init__(
-            self, n_neurons=n_neurons, binary="IF_curr_exp_diff.aplx", label=label,
-            max_atoms_per_core=IFCurrExpDiff._model_based_max_atoms_per_core,
+            self, n_neurons=n_neurons, binary="IF_curr_comb_exp.aplx", label=label,
+            max_atoms_per_core=IFCurrCombExp._model_based_max_atoms_per_core,
             spikes_per_second=spikes_per_second,
             ring_buffer_sigma=ring_buffer_sigma,
             incoming_spike_buffer_size=incoming_spike_buffer_size,
-            model_name="IF_curr_exp_diff", neuron_model=neuron_model,
+            model_name="IF_curr_comb_exp", neuron_model=neuron_model,
             input_type=input_type, synapse_type=synapse_type,
             threshold_type=threshold_type, constraints=constraints)
 
@@ -87,4 +105,4 @@ class IFCurrExpDiff(AbstractPopulationVertex):
 
     @staticmethod
     def get_max_atoms_per_core():
-        return IFCurrExpDiff._model_based_max_atoms_per_core
+        return IFCurrCombExp._model_based_max_atoms_per_core
