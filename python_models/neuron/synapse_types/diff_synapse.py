@@ -126,23 +126,23 @@ class DiffSynapseType(AbstractSynapseType):
 
 
     def get_n_synapse_types(self):
-        return 4 # EX: ex, A and B; IH: INH
+        return 2 # EX and IH
 
     def get_synapse_id_by_target(self, target):
 
         # TODO: update the mapping from name to id
         if target == "excitatory":
             return 0
-        if target == "excitatory_A":
-            return 1
-        elif target == "excitatory_B":
-            return 2
+        #if target == "excitatory_A":
+        #    return 1
+        #elif target == "excitatory_B":
+        #    return 2
         elif target == "inhibitory":
-            return 3
+            return 1
         return None
 
     def get_synapse_targets(self):
-        return "excitatory", "excitatory_A", "excitatory_B", "inhibitory"
+        return "excitatory",  "inhibitory"
 
     def get_n_synapse_type_parameters(self):
         return 10

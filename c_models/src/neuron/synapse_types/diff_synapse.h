@@ -12,8 +12,8 @@
 //---------------------------------------
 // Macros
 //---------------------------------------
-#define SYNAPSE_TYPE_BITS 2
-#define SYNAPSE_TYPE_COUNT 4
+#define SYNAPSE_TYPE_BITS 1
+#define SYNAPSE_TYPE_COUNT 2
 
 //---------------------------------------
 // Synapse parameters
@@ -36,7 +36,7 @@ typedef struct synapse_param_t {
 //! human readable definition for the positions in the input regions for the
 //! different synapse types.
 typedef enum input_buffer_regions {
-	EXCITATORY, EXCITATORY_A, EXCITATORY_B, INHIBITORY,
+	EXCITATORY, INHIBITORY,
 } input_buffer_regions;
 
 //---------------------------------------
@@ -158,10 +158,12 @@ static inline const char *synapse_types_get_type_char(
 		index_t synapse_type_index) {
 	if (synapse_type_index == EXCITATORY) {
 		return "X";
+    /*
 	} else if (synapse_type_index == EXCITATORY_A) {
 		return "X_A";
 	} else if (synapse_type_index == EXCITATORY_B) {
 		return "X_B";
+		*/
 	} else if (synapse_type_index == INHIBITORY) {
 		return "I";
 	} else {
@@ -181,16 +183,17 @@ static inline void synapse_types_print_input(
 }
 
 static inline void synapse_types_print_parameters(synapse_param_pointer_t parameter) {
-	log_info("exc_input_buffer_value  = %11.4k\n", parameter->exc_input_buffer_value);
-	log_info("exc_A_decay  = %11.4k\n", parameter->exc_A_decay);
-	log_info("exc_A_init   = %11.4k\n", parameter->exc_A_init);
-	log_info("exc_A_input_buffer_value  = %11.4k\n", parameter->exc_A_input_buffer_value);
-	log_info("exc_B_decay = %11.4k\n", parameter->exc_B_decay);
-	log_info("exc_B_init  = %11.4k\n", parameter->exc_B_init);
-	log_info("exc_B_input_buffer_value  = %11.4k\n", parameter->exc_B_input_buffer_value);
-	log_info("inh_decay  = %11.4k\n", parameter->inh_decay);
-	log_info("inh_init   = %11.4k\n", parameter->inh_init);
-	log_info("inh_input_buffer_value  = %11.4k\n", parameter->inh_input_buffer_value);
+    log_debug("-------------------------------------\n");
+	log_debug("exc_input_buffer_value  = %11.4k\n", parameter->exc_input_buffer_value);
+	log_debug("exc_A_decay  = %11.4k\n", parameter->exc_A_decay);
+	log_debug("exc_A_init   = %11.4k\n", parameter->exc_A_init);
+	log_debug("exc_A_input_buffer_value  = %11.4k\n", parameter->exc_A_input_buffer_value);
+	log_debug("exc_B_decay = %11.4k\n", parameter->exc_B_decay);
+	log_debug("exc_B_init  = %11.4k\n", parameter->exc_B_init);
+	log_debug("exc_B_input_buffer_value  = %11.4k\n", parameter->exc_B_input_buffer_value);
+	log_debug("inh_decay  = %11.4k\n", parameter->inh_decay);
+	log_debug("inh_init   = %11.4k\n", parameter->inh_init);
+	log_debug("inh_input_buffer_value  = %11.4k\n", parameter->inh_input_buffer_value);
 }
 
 #endif // _DIFF_SYNAPSE_H_
