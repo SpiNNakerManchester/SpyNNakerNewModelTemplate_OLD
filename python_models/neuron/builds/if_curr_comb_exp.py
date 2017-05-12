@@ -136,6 +136,9 @@ class IFCurrCombExp(AbstractPopulationVertex):
     def get_max_atoms_per_core():
         return IFCurrCombExp._model_based_max_atoms_per_core
 
+
+
+
     @staticmethod
     def calc_rise_time(tau_a, tau_b, A=1, B=-1):
         try:

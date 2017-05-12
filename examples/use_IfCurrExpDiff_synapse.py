@@ -11,10 +11,6 @@ pop_ex = p.Population(1, IFCurrCombExp, {}, label="test")
 #pop_ex = p.Population(1, p.IF_curr_exp, {}, label="test")
 
 
-
-
-
-
 #tau_a = 1.7
 #tau_b = 0.2
 #t_rise = IFCurrCombExp.calc_rise_time(tau_a, tau_b)
