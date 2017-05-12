@@ -112,12 +112,12 @@ static inline void synapse_types_add_neuron_input(
 	if (synapse_type_index == EXCITATORY) {
 
 		parameter->exc_A_input_buffer_value =  parameter->exc_A_input_buffer_value +
-				decay_s1615(parameter->exc_A_input_buffer_value,
+				decay_s1615(input,
 				parameter->exc_A_init);
 
 
 		parameter->exc_B_input_buffer_value = parameter->exc_B_input_buffer_value +
-				decay_s1615(parameter->exc_B_input_buffer_value,
+				decay_s1615(input,
 				parameter->exc_B_init);
 
 
@@ -135,7 +135,7 @@ static inline void synapse_types_add_neuron_input(
 
 	} else if (synapse_type_index == INHIBITORY) {
 		parameter->inh_input_buffer_value = parameter->inh_input_buffer_value +
-				decay_s1615(parameter->inh_input_buffer_value,
+				decay_s1615(input,
 				parameter->inh_init);
 	}
 }
@@ -181,12 +181,16 @@ static inline void synapse_types_print_input(
 }
 
 static inline void synapse_types_print_parameters(synapse_param_pointer_t parameter) {
-	log_debug("exc_A_decay  = %11.4k\n", parameter->exc_A_decay);
-	log_debug("exc_A_init   = %11.4k\n", parameter->exc_A_init);
-	log_debug("exc_B_decay = %11.4k\n", parameter->exc_B_decay);
-	log_debug("exc_B_init  = %11.4k\n", parameter->exc_B_init);
-	log_debug("inh_decay  = %11.4k\n", parameter->inh_decay);
-	log_debug("inh_init   = %11.4k\n", parameter->inh_init);
+	log_info("exc_input_buffer_value  = %11.4k\n", parameter->exc_input_buffer_value);
+	log_info("exc_A_decay  = %11.4k\n", parameter->exc_A_decay);
+	log_info("exc_A_init   = %11.4k\n", parameter->exc_A_init);
+	log_info("exc_A_input_buffer_value  = %11.4k\n", parameter->exc_A_input_buffer_value);
+	log_info("exc_B_decay = %11.4k\n", parameter->exc_B_decay);
+	log_info("exc_B_init  = %11.4k\n", parameter->exc_B_init);
+	log_info("exc_B_input_buffer_value  = %11.4k\n", parameter->exc_B_input_buffer_value);
+	log_info("inh_decay  = %11.4k\n", parameter->inh_decay);
+	log_info("inh_init   = %11.4k\n", parameter->inh_init);
+	log_info("inh_input_buffer_value  = %11.4k\n", parameter->inh_input_buffer_value);
 }
 
 #endif // _DIFF_SYNAPSE_H_

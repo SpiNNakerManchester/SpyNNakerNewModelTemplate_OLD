@@ -23,9 +23,13 @@ class IFCurrExpDiff(AbstractPopulationVertex):
         'v_rest': -65.0,
         'v_reset': -65.0,
         'v_thresh': -50.0,
+        'exc_inp_buf_val':0,
         'exc_A_tau': 25,
+        'exc_A_init_i': 1,
         'exc_B_tau': 50.0,
+        'exc_B_init_i':1,
         'inh_tau': 5.0,
+        'inh_init_i':0,
         'tau_refrac': 0.1,
         'i_offset': 0}
 
@@ -36,9 +40,13 @@ class IFCurrExpDiff(AbstractPopulationVertex):
             v_rest=default_parameters['v_rest'],
             v_reset=default_parameters['v_reset'],
             v_thresh=default_parameters['v_thresh'],
+            exc_inp_buf_val=default_parameters['exc_inp_buf_val'],
             exc_A_tau=default_parameters['exc_A_tau'],
+            exc_A_init_i=default_parameters['exc_A_init_i'],
             exc_B_tau=default_parameters['exc_B_tau'],
+            exc_B_init_i=default_parameters['exc_B_init_i'],
             inh_tau=default_parameters['inh_tau'],
+            inh_init_i=default_parameters['inh_init_i'],
             tau_refrac=default_parameters['tau_refrac'],
             i_offset=default_parameters['i_offset'], v_init=None):
 
@@ -49,9 +57,13 @@ class IFCurrExpDiff(AbstractPopulationVertex):
             v_reset, tau_refrac)
 
         synapse_type = DiffSynapseType( n_neurons,
+                exc_inp_buf_val,
                 exc_A_tau,
+                exc_A_init_i,
                 exc_B_tau,
-                inh_tau)
+                exc_B_init_i,
+                inh_tau,
+                inh_init_i)
 
         # synapse_type = SynapseTypeExponential(
         #     n_neurons, tau_syn_E, tau_syn_I)

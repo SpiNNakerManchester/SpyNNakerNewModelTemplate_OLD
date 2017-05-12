@@ -1,4 +1,4 @@
-import spynnaker.pyNN as p
+import spynnaker7.pyNN as p
 from python_models.neuron.builds.if_curr_exp_diff import IFCurrExpDiff
 import plot_utils
 p.setup(1)
