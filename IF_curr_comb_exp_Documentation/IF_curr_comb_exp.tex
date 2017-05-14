@@ -26,13 +26,18 @@ i(t) = Ae^{\frac{-t}{\tau_a} + Be^{\frac{-t}{\tau_b}
 \label{eq:generic_from}
 \end{equation}
 
-To give the alpha response
-
 To give the respone defined in Eqn.~\ref{eqn:combined_exponential_response}, coefficients are set $A=-B=f$. The response defined in ***cite*** can then be repeated by setting $\tau_a = \tau_{rise} = 1.7$ and $\tau_b = \tau_{decay} = 0.2$. These coefficients give the response shown in Fig.~\ref{fig:typical_response}.
-
 \begin{figure}
 \caption{Synapse behaviour replicating ***cite***, achieved through combining exponetnials according to \ref{eqn:generic_form} and setting coefficients $A=-B=f$ (where $f$ is calculated according to Eqn.~\ref{eqn:combined_exponential_response}), and $\tau_a = 1.7$ and $\tau_b = 0.2$.
 \label{fig:typical_response}
 \end{figure}
+Note that Fig.\ref~{fig:typical_response} also shows the two components before combining: this shows that for the coefficients given, the early response is dominated by the contribution from the first component -- designated $\tau_{rise}$ -- with the subsequent response dominated by the second component -- designated $\tau_{decay}$.  
+
+
+\section{$\alpha$ Synapyse}
+To give the $\alpha$ (alpha) response, coefficients of \ref{eqn:generic_form} are assigned such that $A= , B=$, and hence the overall response collapses to:
+\begin{equation}
+\label{eqn:alpha_response}
+\end{equation}
 
 \end{document}
