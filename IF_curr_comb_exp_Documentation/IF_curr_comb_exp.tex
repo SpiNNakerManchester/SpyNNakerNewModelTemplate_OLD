@@ -13,11 +13,26 @@ This is time for all good men to come to the aid of their party!
 
 \begin{eqnarray}
 i(t) = f(e^{-\frac{t}{\tau_a}} - e^{-\frac{-t}{\tau_b}}) \\
+t_{rise} = ln\frac{B\tau_x}{A\tau_x}(\frac{\tau_x\tau_x}{\tau_x - \tau_x} \\
 f = \frac{1}{e^{-\frac{t_{rise}}{\tau_a}} - e^{-\frac{-t_{rise}}{\tau_b}}} \\
-\label{combined_exponential_response}
+\label{eqn:combined_exponential_response}
 \end{eqnarray}
 
 \section{SpiNNaker Implementation}
-The synapse is implemented on the SpiNNaker platform \ldots
+A generic combined exponential synapse is implemented to facilitate exploration of further synapse shapes defined through combinations of exopnential functions. The current $i(t)$ is therefore defined as in Eqn.\ref{eq:generic_form}. 
+\begin{equation}
+i(t) = Ae^{\frac{-t}{\tau_a} + Be^{\frac{-t}{\tau_b}
+\frac{di(t)}{dt} = \frac{-A}{\tau_a}e^{\frac{-t}{\tau_a} - \frac{B}{\tau_b}e^{\frac{-t}{\tau_b}
+\label{eq:generic_from}
+\end{equation}
+
+To give the alpha responsem
+
+To give the respone defined in Eqn.~\ref{eqn:combined_exponential_response}, coefficients are set $A=-B=f$. The response defined in ***cite*** can then be repeated by setting $\tau_a = \tau_{rise} = 1.7$ and $\tau_b = \tau_{decay} = 0.2$. These coefficients give the response shown in Fig.~\ref{fig:typical_response}.
+
+\begin{figure}
+\caption{Synapse behaviour replicating ***cite***, achieved through combining exponetnials according to \ref{eqn:generic_form} and setting coefficients $A=-B=f$ (where $f$ is calculated according to Eqn.~\ref{eqn:combined_exponential_response}), and $\tau_a = 1.7$ and $\tau_b = 0.2$.
+\label{{fig:typical_response}
+\end{figure}
 
 \end{document}
