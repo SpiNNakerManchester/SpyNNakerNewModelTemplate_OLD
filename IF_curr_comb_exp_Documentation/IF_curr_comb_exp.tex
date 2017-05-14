@@ -9,7 +9,7 @@
 \maketitle
 
 \section{Synapse Dynamics}
-This is time for all good men to come to the aid of their party!
+Upon the presynaptic neuron firing, a synapse response is triggered, causing some input to be delivered to the post-synaptic neuron. This document covers the implementation of a current response shaped via two exponential functions. First the target shape is introduced, followed by details of an implementation on the SpiNNaker platform.
 
 \begin{eqnarray}
 i(t) = f(e^{-\frac{t}{\tau_a}} - e^{-\frac{-t}{\tau_b}}) \\
@@ -26,7 +26,7 @@ i(t) = Ae^{\frac{-t}{\tau_a} + Be^{\frac{-t}{\tau_b}
 \label{eq:generic_from}
 \end{equation}
 
-To give the alpha responsem
+To give the alpha response
 
 To give the respone defined in Eqn.~\ref{eqn:combined_exponential_response}, coefficients are set $A=-B=f$. The response defined in ***cite*** can then be repeated by setting $\tau_a = \tau_{rise} = 1.7$ and $\tau_b = \tau_{decay} = 0.2$. These coefficients give the response shown in Fig.~\ref{fig:typical_response}.
 
