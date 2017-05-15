@@ -10,34 +10,53 @@
 
 \section{Synapse Dynamics}
 Upon the presynaptic neuron firing, a synapse response is triggered, causing some input to be delivered to the post-synaptic neuron. This document covers the implementation of a current response shaped via two exponential functions. First the target shape is introduced, followed by details of an implementation on the SpiNNaker platform.
-
 \begin{eqnarray}
 i(t) = f(e^{-\frac{t}{\tau_a}} - e^{-\frac{-t}{\tau_b}}) \\
 t_{rise} = ln\frac{B\tau_x}{A\tau_x}(\frac{\tau_x\tau_x}{\tau_x - \tau_x} \\
-f = \frac{1}{e^{-\frac{t_{rise}}{\tau_a}} - e^{-\frac{-t_{rise}}{\tau_b}}} \\
+f = \frac{1}{e^{-\frac{t_{rise}}{\tau_a}} - e^{-\frac{-t_{rise}}{\tau_b}}}
 \label{eqn:combined_exponential_response}
 \end{eqnarray}
 
 \section{SpiNNaker Implementation}
-A generic combined exponential synapse is implemented to facilitate exploration of further synapse shapes defined through combinations of exopnential functions. The current $i(t)$ is therefore defined as in Eqn.\ref{eq:generic_form}. 
-\begin{equation}
-i(t) = Ae^{\frac{-t}{\tau_a} + Be^{\frac{-t}{\tau_b}
-\frac{di(t)}{dt} = \frac{-A}{\tau_a}e^{\frac{-t}{\tau_a} - \frac{B}{\tau_b}e^{\frac{-t}{\tau_b}
-\label{eq:generic_from}
-\end{equation}
+A generic combined exponential synapse is implemented to facilitate exploration of further synapse shapes defined through combinations of exopnential functions. The current $i(t)$ is therefore defined as in Eqn.\ref{eqn:generic_form}. 
+\begin{eqnarray}
+i(t) = Ae^{\frac{-t}{\tau_a}} + Be^{\frac{-t}{\tau_b}}\\
+\frac{di(t)}{dt} = \frac{-A}{\tau_a}e^{\frac{-t}{\tau_a} - \frac{B}{\tau_b}e^{\frac{-t}{\tau_b}}}
+\label{eqn:generic_form}
+\end{eqnarray}
 
 To give the respone defined in Eqn.~\ref{eqn:combined_exponential_response}, coefficients are set $A=-B=f$. The response defined in ***cite*** can then be repeated by setting $\tau_a = \tau_{rise} = 1.7$ and $\tau_b = \tau_{decay} = 0.2$. These coefficients give the response shown in Fig.~\ref{fig:typical_response}.
 \begin{figure}
-\caption{Synapse behaviour replicating ***cite***, achieved through combining exponetnials according to \ref{eqn:generic_form} and setting coefficients $A=-B=f$ (where $f$ is calculated according to Eqn.~\ref{eqn:combined_exponential_response}), and $\tau_a = 1.7$ and $\tau_b = 0.2$.
+\caption{Synapse behaviour replicating ***cite***, achieved through combining exponetnials according to \ref{eqn:generic_form} and setting coefficients $A=-B=f$ (where $f$ is calculated according to Eqn.~\ref{eqn:combined_exponential_response}), and $\tau_a = 1.7$ and $\tau_b = 0.2$.}
 \label{fig:typical_response}
 \end{figure}
-Note that Fig.\ref~{fig:typical_response} also shows the two components before combining: this shows that for the coefficients given, the early response is dominated by the contribution from the first component -- designated $\tau_{rise}$ -- with the subsequent response dominated by the second component -- designated $\tau_{decay}$.  
+Note that Fig.~\ref{fig:typical_response} also shows the two components before combining: this shows that for the coefficients given, the early response is dominated by the contribution from the first component -- designated $\tau_{rise}$ -- with the subsequent response dominated by the second component -- designated $\tau_{decay}$.  
 
 
-\section{$\alpha$ Synapyse}
-To give the $\alpha$ (alpha) response, coefficients of \ref{eqn:generic_form} are assigned such that $A= , B=$, and hence the overall response collapses to:
-\begin{equation}
-\label{eqn:alpha_response}
-\end{equation}
+\section{Alpha Synapyse}
+The characteristic `alpha' response is defined by two coupled differential equations. Upon combination, and setting equal time constants, a response similar to combining two exponential responses is achieved. The response of $g_{syn}$, together with the two coupled differential equations, can be defined as:
+\begin{eqnarray}
+g_{syn}(t) & = & \bar{g}_{syn}fg(t) \nonumber \\
+\frac{dg}{dt} & = & \frac{1}{\tau_{decay}} (-g + h) \nonumber \\
+\frac{dh}{dt} & = & \frac{1}{\tau_{rise}}(-h) \nonumber
+\label{eqn:alpha_coupled_diff_eqns}
+\end{eqnarray}
+
+Setting $\tau_{rise}=\tau_{decay} = \tau$ and solving for $h(t)$ via separation of variables:
+\begin{eqnarray}
+\int \frac{1}{h} dh & = & \int -\frac{1}{\tau}dt \nonumber \\
+\ln{h} & = & -\frac{t}{\tau} + C \nonumber \\
+h(t) & = & e^{-\frac{t}{\tau}+C} = ke^{-\frac{t}{\tau}} \nonumber
+\label{eqn:solve_for_h}
+\end{eqnarray}
+Rearranging to the form $\frac{dy}{dt} +Py = Qt$, substituting for $h(t)$, and solving for $g(t)$ by integration via the particular integral (and the reverse product rule):
+\begin{eqnarray}
+\frac{dg}{dt} + \frac{g}{\tau} =\frac{k}{\tau}e^{-\frac{t}{\tau}} \nonumber \\
+\mathrm{P.I.} =  e^{\int P dt} = e^{\frac{t}{\tau}} \nonumber \\
+e^{\frac{t}{\tau}i}\frac{dg}{dt} +  e^{\frac{t}{\tau}\frac{g}{\tau}} = \frac{k}{\tau}e^{-\frac{t}{\tau}}e^{\frac{t}{\tau}} \nonumber \\
+\frac{d}{dt} g e^{\frac{t}{\tau}} = \frac{k}{\tau}e^{-\frac{t}{\tau} + \frac{t}{\tau}} \nonumber \\
+g e^{\frac{t}{\tau}} = \int \frac{k}{\tau}e^0 dt = \frac{kt}{\tau} \nonumber \\
+g(t) = \frac{kt}{\tau}e^{-\frac{t}{\tau}}
+\end{eqnarray}
 
 \end{document}
