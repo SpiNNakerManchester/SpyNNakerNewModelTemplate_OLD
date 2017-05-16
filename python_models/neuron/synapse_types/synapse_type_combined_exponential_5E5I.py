@@ -1104,7 +1104,7 @@ class SynapseTypeCombExp5E5I(AbstractSynapseType):
                             _COMB_EXP_TYPES.RESPONSE.data_type),
             NeuronParameter(self._inh5_b_B, _COMB_EXP_TYPES.CONST.data_type),
             NeuronParameter(i5_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(i5_b_init, _COMB_EXP_TYPES.INIT.data_type),
+            NeuronParameter(i5_b_init, _COMB_EXP_TYPES.INIT.data_type)
         ]
 
     def get_synapse_type_parameter_types(self):

@@ -136,7 +136,7 @@
  //! human readable definition for the positions in the input regions for the
  //! different synapse types.
  typedef enum input_buffer_regions {
- 	EXCITATORY, EXCITATORY2, EXCITATORY3, EXCITATORY4, EXCITATORY5, INHIBITORY, INHIBITORY2, INHIBITORY3, INHIBITORY4, INHIBITORY5,
+ 	EXCITATORY, EXCITATORY2, EXCITATORY3, EXCITATORY4, EXCITATORY5, INHIBITORY, INHIBITORY2, INHIBITORY3, INHIBITORY4, INHIBITORY5
  } input_buffer_regions;
 
  static inline void synapse_types_shape_input(synapse_param_pointer_t parameter){
@@ -241,6 +241,19 @@
  	parameter->inh3_response = (parameter->inh3_a_A * parameter->inh3_a_response) + (parameter->inh3_b_B * parameter->inh3_b_response);
  	parameter->inh4_response = (parameter->inh4_a_A * parameter->inh4_a_response) + (parameter->inh4_b_B * parameter->inh4_b_response);
  	parameter->inh5_response = (parameter->inh5_a_A * parameter->inh5_a_response) + (parameter->inh5_b_B * parameter->inh5_b_response);
+
+
+ 	log_info("ex1 = %8.4k, ex2 = %8.4k, ex3 = %8.4k, ex4 = %8.4k, ex5 = %8.4k, inh = %8.4k, inh2 = %8.4k, inh3 = %8.4k, inh4 = %8.4k, inh5 = %8.4k",
+ 			parameter->exc_response,
+			parameter->exc2_response,
+			parameter->exc3_response,
+			parameter->exc4_response,
+			parameter->exc5_response,
+			parameter->inh_response,
+			parameter->inh2_response,
+			parameter->inh3_response,
+			parameter->inh4_response,
+			parameter->inh5_response);
  }
 
  static inline void synapse_types_add_neuron_input(
