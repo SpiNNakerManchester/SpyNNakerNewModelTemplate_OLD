@@ -11,10 +11,105 @@ from spynnaker.pyNN.models.neural_properties.neural_parameter \
 from data_specification.enums.data_type import DataType
 from enum import Enum
 class _COMB_EXP_TYPES(Enum):
-    RESPONSE = (1, DataType.S1615)
-    CONST = (2, DataType.S1615)
-    DECAY = (3, DataType.UINT32)
-    INIT = (4, DataType.UINT32)
+    EXC_RESPONSE = (1, DataType.S1615)
+    EXC_A_RESPONSE = (2, DataType.S1615)
+    EXC_A_A = (3, DataType.S1615)
+    EXC_A_DECAY = (4, DataType.UINT32)
+    EXC_A_INIT = (5, DataType.UINT32)
+    EXC_B_RESPONSE = (6, DataType.S1615)
+    EXC_B_B = (7, DataType.S1615)
+    EXC_B_DECAY = (8, DataType.UINT32)
+    EXC_B_INIT = (9, DataType.UINT32)
+
+    EXC2_RESPONSE = (10, DataType.S1615)
+    EXC2_A_RESPONSE = (11, DataType.S1615)
+    EXC2_A_A = (12, DataType.S1615)
+    EXC2_A_DECAY = (13, DataType.UINT32)
+    EXC2_A_INIT = (14, DataType.UINT32)
+    EXC2_B_RESPONSE = (15, DataType.S1615)
+    EXC2_B_B = (16, DataType.S1615)
+    EXC2_B_DECAY = (17, DataType.UINT32)
+    EXC2_B_INIT = (18, DataType.UINT32)
+
+    EXC3_RESPONSE = (19, DataType.S1615)
+    EXC3_A_RESPONSE = (20, DataType.S1615)
+    EXC3_A_A = (21, DataType.S1615)
+    EXC3_A_DECAY = (22, DataType.UINT32)
+    EXC3_A_INIT = (23, DataType.UINT32)
+    EXC3_B_RESPONSE = (24, DataType.S1615)
+    EXC3_B_B = (25, DataType.S1615)
+    EXC3_B_DECAY = (26, DataType.UINT32)
+    EXC3_B_INIT = (27, DataType.UINT32)
+
+    EXC4_RESPONSE = (28, DataType.S1615)
+    EXC4_A_RESPONSE = (29, DataType.S1615)
+    EXC4_A_A = (30, DataType.S1615)
+    EXC4_A_DECAY = (31, DataType.UINT32)
+    EXC4_A_INIT = (32, DataType.UINT32)
+    EXC4_B_RESPONSE = (33, DataType.S1615)
+    EXC4_B_B = (34, DataType.S1615)
+    EXC4_B_DECAY = (35, DataType.UINT32)
+    EXC4_B_INIT = (36, DataType.UINT32)
+
+    EXC5_RESPONSE = (37, DataType.S1615)
+    EXC5_A_RESPONSE = (38, DataType.S1615)
+    EXC5_A_A = (39, DataType.S1615)
+    EXC5_A_DECAY = (40, DataType.UINT32)
+    EXC5_A_INIT = (41, DataType.UINT32)
+    EXC5_B_RESPONSE = (42, DataType.S1615)
+    EXC5_B_B = (43, DataType.S1615)
+    EXC5_B_DECAY = (44, DataType.UINT32)
+    EXC5_B_INIT = (45, DataType.UINT32)
+
+    INH_RESPONSE = (46, DataType.S1615)
+    INH_A_RESPONSE = (47, DataType.S1615)
+    INH_A_A = (48, DataType.S1615)
+    INH_A_DECAY = (49, DataType.UINT32)
+    INH_A_INIT = (50, DataType.UINT32)
+    INH_B_RESPONSE = (51, DataType.S1615)
+    INH_B_B = (52, DataType.S1615)
+    INH_B_DECAY = (53, DataType.UINT32)
+    INH_B_INIT = (54, DataType.UINT32)
+
+    INH2_RESPONSE = (55, DataType.S1615)
+    INH2_A_RESPONSE = (56, DataType.S1615)
+    INH2_A_A = (57, DataType.S1615)
+    INH2_A_DECAY = (58, DataType.UINT32)
+    INH2_A_INIT = (59, DataType.UINT32)
+    INH2_B_RESPONSE = (60, DataType.S1615)
+    INH2_B_B = (61, DataType.S1615)
+    INH2_B_DECAY = (62, DataType.UINT32)
+    INH2_B_INIT = (63, DataType.UINT32)
+
+    INH3_RESPONSE = (64, DataType.S1615)
+    INH3_A_RESPONSE = (65, DataType.S1615)
+    INH3_A_A = (66, DataType.S1615)
+    INH3_A_DECAY = (67, DataType.UINT32)
+    INH3_A_INIT = (68, DataType.UINT32)
+    INH3_B_RESPONSE = (69, DataType.S1615)
+    INH3_B_B = (70, DataType.S1615)
+    INH3_B_DECAY = (71, DataType.UINT32)
+    INH3_B_INIT = (72, DataType.UINT32)
+
+    INH4_RESPONSE = (73, DataType.S1615)
+    INH4_A_RESPONSE = (74, DataType.S1615)
+    INH4_A_A = (75, DataType.S1615)
+    INH4_A_DECAY = (76, DataType.UINT32)
+    INH4_A_INIT = (77, DataType.UINT32)
+    INH4_B_RESPONSE = (78, DataType.S1615)
+    INH4_B_B = (79, DataType.S1615)
+    INH4_B_DECAY = (80, DataType.UINT32)
+    INH4_B_INIT = (81, DataType.UINT32)
+
+    INH5_RESPONSE = (82, DataType.S1615)
+    INH5_A_RESPONSE = (83, DataType.S1615)
+    INH5_A_A = (84, DataType.S1615)
+    INH5_A_DECAY = (85, DataType.UINT32)
+    INH5_A_INIT = (86, DataType.UINT32)
+    INH5_B_RESPONSE = (87, DataType.S1615)
+    INH5_B_B = (88, DataType.S1615)
+    INH5_B_DECAY = (89, DataType.UINT32)
+    INH5_B_INIT = (90, DataType.UINT32)
 
     def __new__(cls, value, data_type):
         obj = object.__new__(cls)
@@ -948,163 +1043,163 @@ class SynapseTypeCombExp5E5I(AbstractSynapseType):
         return [
             # excitatory
             NeuronParameter(self._exc_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
+                            _COMB_EXP_TYPES.EXC_RESPONSE.data_type),
 
             NeuronParameter(self._exc_a_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._exc_a_A, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(e_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(e_a_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.EXC_A_RESPONSE.data_type),
+            NeuronParameter(self._exc_a_A, _COMB_EXP_TYPES.EXC_A_A.data_type),
+            NeuronParameter(e_a_decay, _COMB_EXP_TYPES.EXC_A_DECAY.data_type),
+            NeuronParameter(e_a_init, _COMB_EXP_TYPES.EXC_A_INIT.data_type),
 
             NeuronParameter(self._exc_b_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._exc_b_B, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(e_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(e_b_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.EXC_B_RESPONSE.data_type),
+            NeuronParameter(self._exc_b_B, _COMB_EXP_TYPES.EXC_B_B.data_type),
+            NeuronParameter(e_b_decay, _COMB_EXP_TYPES.EXC_B_DECAY.data_type),
+            NeuronParameter(e_b_init, _COMB_EXP_TYPES.EXC_B_INIT.data_type),
 
             # excitatory2
             NeuronParameter(self._exc2_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
+                            _COMB_EXP_TYPES.EXC_RESPONSE.data_type),
 
             NeuronParameter(self._exc2_a_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._exc2_a_A, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(e2_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(e2_a_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.EXC2_A_RESPONSE.data_type),
+            NeuronParameter(self._exc2_a_A, _COMB_EXP_TYPES.EXC2_A_A.data_type),
+            NeuronParameter(e2_a_decay, _COMB_EXP_TYPES.EXC2_A_DECAY.data_type),
+            NeuronParameter(e2_a_init, _COMB_EXP_TYPES.EXC2_A_INIT.data_type),
 
             NeuronParameter(self._exc2_b_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._exc2_b_B, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(e2_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(e2_b_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.EXC2_B_RESPONSE.data_type),
+            NeuronParameter(self._exc2_b_B, _COMB_EXP_TYPES.EXC2_B_B.data_type),
+            NeuronParameter(e2_b_decay, _COMB_EXP_TYPES.EXC2_B_DECAY.data_type),
+            NeuronParameter(e2_b_init, _COMB_EXP_TYPES.EXC2_B_INIT.data_type),
 
             # excitatory3
             NeuronParameter(self._exc3_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
+                            _COMB_EXP_TYPES.EXC3_RESPONSE.data_type),
 
             NeuronParameter(self._exc3_a_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._exc3_a_A, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(e3_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(e3_a_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.EXC3_A_RESPONSE.data_type),
+            NeuronParameter(self._exc3_a_A, _COMB_EXP_TYPES.EXC3_A_A.data_type),
+            NeuronParameter(e3_a_decay, _COMB_EXP_TYPES.EXC3_A_DECAY.data_type),
+            NeuronParameter(e3_a_init, _COMB_EXP_TYPES.EXC3_A_INIT.data_type),
 
             NeuronParameter(self._exc3_b_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._exc3_b_B, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(e3_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(e3_b_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.EXC3_B_RESPONSE.data_type),
+            NeuronParameter(self._exc3_b_B, _COMB_EXP_TYPES.EXC3_B_B.data_type),
+            NeuronParameter(e3_b_decay, _COMB_EXP_TYPES.EXC3_B_DECAY.data_type),
+            NeuronParameter(e3_b_init, _COMB_EXP_TYPES.EXC3_B_INIT.data_type),
 
             # excitatory4
             NeuronParameter(self._exc4_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
+                            _COMB_EXP_TYPES.EXC4_RESPONSE.data_type),
 
             NeuronParameter(self._exc4_a_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._exc4_a_A, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(e4_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(e4_a_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.EXC4_A_RESPONSE.data_type),
+            NeuronParameter(self._exc4_a_A, _COMB_EXP_TYPES.EXC4_A_A.data_type),
+            NeuronParameter(e4_a_decay, _COMB_EXP_TYPES.EXC4_A_DECAY.data_type),
+            NeuronParameter(e4_a_init, _COMB_EXP_TYPES.EXC4_A_INIT.data_type),
 
             NeuronParameter(self._exc4_b_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._exc4_b_B, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(e4_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(e4_b_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.EXC4_B_RESPONSE.data_type),
+            NeuronParameter(self._exc4_b_B, _COMB_EXP_TYPES.EXC4_B_B.data_type),
+            NeuronParameter(e4_b_decay, _COMB_EXP_TYPES.EXC4_B_DECAY.data_type),
+            NeuronParameter(e4_b_init, _COMB_EXP_TYPES.EXC4_B_INIT.data_type),
 
             # excitatory5
             NeuronParameter(self._exc5_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
+                            _COMB_EXP_TYPES.EXC5_RESPONSE.data_type),
 
             NeuronParameter(self._exc5_a_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._exc5_a_A, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(e5_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(e5_a_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.EXC5_RESPONSE.data_type),
+            NeuronParameter(self._exc5_a_A, _COMB_EXP_TYPES.EXC5_A_A.data_type),
+            NeuronParameter(e5_a_decay, _COMB_EXP_TYPES.EXC5_A_DECAY.data_type),
+            NeuronParameter(e5_a_init, _COMB_EXP_TYPES.EXC5_A_INIT.data_type),
 
             NeuronParameter(self._exc5_b_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._exc5_b_B, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(e5_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(e5_b_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.EXC5_B_RESPONSE.data_type),
+            NeuronParameter(self._exc5_b_B, _COMB_EXP_TYPES.EXC5_B_B.data_type),
+            NeuronParameter(e5_b_decay, _COMB_EXP_TYPES.EXC5_B_DECAY.data_type),
+            NeuronParameter(e5_b_init, _COMB_EXP_TYPES.EXC5_B_INIT.data_type),
 
             # inhibitory
             NeuronParameter(self._inh_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
+                            _COMB_EXP_TYPES.INH_RESPONSE.data_type),
 
             NeuronParameter(self._inh_a_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._inh_a_A, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(i_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(i_a_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.INH_A_RESPONSE.data_type),
+            NeuronParameter(self._inh_a_A, _COMB_EXP_TYPES.INH_A_A.data_type),
+            NeuronParameter(i_a_decay, _COMB_EXP_TYPES.INH_A_DECAY.data_type),
+            NeuronParameter(i_a_init, _COMB_EXP_TYPES.INH_A_INIT.data_type),
 
             NeuronParameter(self._inh_b_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._inh_b_B, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(i_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(i_b_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.INH_B_RESPONSE.data_type),
+            NeuronParameter(self._inh_b_B, _COMB_EXP_TYPES.INH_B_B.data_type),
+            NeuronParameter(i_b_decay, _COMB_EXP_TYPES.INH_B_DECAY.data_type),
+            NeuronParameter(i_b_init, _COMB_EXP_TYPES.INH_B_INIT.data_type),
 
             # inhibitory2
             NeuronParameter(self._inh2_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
+                            _COMB_EXP_TYPES.INH2_RESPONSE.data_type),
 
             NeuronParameter(self._inh2_a_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._inh2_a_A, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(i2_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(i2_a_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.INH2_A_RESPONSE.data_type),
+            NeuronParameter(self._inh2_a_A, _COMB_EXP_TYPES.INH2_A_A.data_type),
+            NeuronParameter(i2_a_decay, _COMB_EXP_TYPES.INH2_A_DECAY.data_type),
+            NeuronParameter(i2_a_init, _COMB_EXP_TYPES.INH2_A_INIT.data_type),
 
             NeuronParameter(self._inh2_b_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._inh2_b_B, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(i2_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(i2_b_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.INH2_B_RESPONSE.data_type),
+            NeuronParameter(self._inh2_b_B, _COMB_EXP_TYPES.INH2_B_B.data_type),
+            NeuronParameter(i2_b_decay, _COMB_EXP_TYPES.INH2_B_DECAY.data_type),
+            NeuronParameter(i2_b_init, _COMB_EXP_TYPES.INH2_B_INIT.data_type),
 
             # inhibitory3
             NeuronParameter(self._inh3_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
+                            _COMB_EXP_TYPES.INH3_RESPONSE.data_type),
 
             NeuronParameter(self._inh3_a_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._inh3_a_A, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(i3_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(i3_a_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.INH3_A_RESPONSE.data_type),
+            NeuronParameter(self._inh3_a_A, _COMB_EXP_TYPES.INH3_A_A.data_type),
+            NeuronParameter(i3_a_decay, _COMB_EXP_TYPES.INH3_A_DECAY.data_type),
+            NeuronParameter(i3_a_init, _COMB_EXP_TYPES.INH3_A_INIT.data_type),
 
             NeuronParameter(self._inh3_b_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._inh3_b_B, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(i3_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(i3_b_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.INH3_B_RESPONSE.data_type),
+            NeuronParameter(self._inh3_b_B, _COMB_EXP_TYPES.INH3_B_B.data_type),
+            NeuronParameter(i3_b_decay, _COMB_EXP_TYPES.INH3_B_DECAY.data_type),
+            NeuronParameter(i3_b_init, _COMB_EXP_TYPES.INH3_B_INIT.data_type),
 
             # inhibitory4
             NeuronParameter(self._inh4_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
+                            _COMB_EXP_TYPES.INH4_RESPONSE.data_type),
 
             NeuronParameter(self._inh4_a_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._inh4_a_A, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(i4_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(i4_a_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.INH4_A_RESPONSE.data_type),
+            NeuronParameter(self._inh4_a_A, _COMB_EXP_TYPES.INH4_A_A.data_type),
+            NeuronParameter(i4_a_decay, _COMB_EXP_TYPES.INH4_A_DECAY.data_type),
+            NeuronParameter(i4_a_init, _COMB_EXP_TYPES.INH4_A_INIT.data_type),
 
             NeuronParameter(self._inh4_b_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._inh4_b_B, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(i4_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(i4_b_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.INH4_B_RESPONSE.data_type),
+            NeuronParameter(self._inh4_b_B, _COMB_EXP_TYPES.INH4_B_B.data_type),
+            NeuronParameter(i4_b_decay, _COMB_EXP_TYPES.INH4_B_DECAY.data_type),
+            NeuronParameter(i4_b_init, _COMB_EXP_TYPES.INH4_B_INIT.data_type),
 
             # inhibitory5
             NeuronParameter(self._inh5_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
+                            _COMB_EXP_TYPES.INH5_RESPONSE.data_type),
 
             NeuronParameter(self._inh5_a_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._inh5_a_A, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(i5_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(i5_a_init, _COMB_EXP_TYPES.INIT.data_type),
+                            _COMB_EXP_TYPES.INH5_A_RESPONSE.data_type),
+            NeuronParameter(self._inh5_a_A, _COMB_EXP_TYPES.INH5_A_A.data_type),
+            NeuronParameter(i5_a_decay, _COMB_EXP_TYPES.INH5_A_DECAY.data_type),
+            NeuronParameter(i5_a_init, _COMB_EXP_TYPES.INH5_A_INIT.data_type),
 
             NeuronParameter(self._inh5_b_response,
-                            _COMB_EXP_TYPES.RESPONSE.data_type),
-            NeuronParameter(self._inh5_b_B, _COMB_EXP_TYPES.CONST.data_type),
-            NeuronParameter(i5_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
-            NeuronParameter(i5_b_init, _COMB_EXP_TYPES.INIT.data_type)
+                            _COMB_EXP_TYPES.INH5_B_RESPONSE.data_type),
+            NeuronParameter(self._inh5_b_B, _COMB_EXP_TYPES.INH5_B_B.data_type),
+            NeuronParameter(i5_b_decay, _COMB_EXP_TYPES.INH5_B_DECAY.data_type),
+            NeuronParameter(i5_b_init, _COMB_EXP_TYPES.INH5_B_INIT.data_type)
         ]
 
     def get_synapse_type_parameter_types(self):
