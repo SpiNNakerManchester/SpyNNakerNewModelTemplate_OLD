@@ -655,6 +655,7 @@ class SynapseTypeCombExp5E5I(AbstractSynapseType):
 
 
     # inhibitory3
+
     @property
     def inh3_response(self):
         return self._inh3_response
@@ -848,7 +849,7 @@ class SynapseTypeCombExp5E5I(AbstractSynapseType):
             inh5_b_tau, self._n_neurons)
 
     def get_n_synapse_types(self):
-        return 4 # EX, EX_2 and INH, INH_2
+        return 10 # EX, EX2, EX3, EX4, EX5 and INH, INH2, INH3, INH4, INH5
 
     def get_synapse_id_by_target(self, target):
 
@@ -875,7 +876,7 @@ class SynapseTypeCombExp5E5I(AbstractSynapseType):
         return None
 
     def get_synapse_targets(self):
-        return "excitatory", "excitatory2", "inhibitory", "inhibitory2"
+        return "excitatory", "excitatory2", "excitatory3", "excitatory4", "excitatory5", "inhibitory", "inhibitory2", "inhibitory3", "inhibitory4", "inhibitory5"
 
     def get_n_synapse_type_parameters(self):
         return 10*9

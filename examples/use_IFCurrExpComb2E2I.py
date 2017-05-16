@@ -3,36 +3,27 @@ from python_models.neuron.builds.if_curr_comb_exp_2E2I import IFCurrCombExp2E2I
 import plot_utils
 p.setup(0.1)
 
-pop_src = p.Population(1, p.SpikeSourceArray, {'spike_times': [[0.1]]}, label="src1")
+pop_src1 = p.Population(1, p.SpikeSourceArray, {'spike_times': [[1]]}, label="src1")
+pop_src2 = p.Population(1, p.SpikeSourceArray, {'spike_times': [[1]]}, label="src1")
+pop_src3 = p.Population(1, p.SpikeSourceArray, {'spike_times': [[1]]}, label="src1")
+pop_src4 = p.Population(1, p.SpikeSourceArray, {'spike_times': [[1]]}, label="src1")
 
 #IFCurrCombExp.set_excitatory_scalar()
 
 pop_ex = p.Population(1, IFCurrCombExp2E2I, {}, label="test")
-pop_ex.set(#'v_thresh',[-54.00, -50, -57, -48, -53.2])
-#        'exc_a_response', 0,
-#        'exc_a_A',1,
-        'exc_a_tau', 0.9)
-
-pop_ex.set('inh2_b_tau', 10)
-
-#        'exc_b_response',0,
-#        'exc_b_B',-1,
-#        'exc_b_tau', 1.7)
-
-#pop_ex = p.Population(1, p.IF_curr_exp, {}, label="test")
-
-
-#tau_a = 1.7
-#tau_b = 0.2
-#t_rise = IFCurrCombExp.calc_rise_time(tau_a, tau_b)
-#sf = IFCurrCombExp.calc_scalar_f(tau_a, tau_b)
-
 
 # define the projection
-input_proj = p.Projection(pop_src, pop_ex,
-        p.OneToOneConnector(weights=1, delays=1), target="excitatory")
-input_proj2 = p.Projection(pop_src, pop_ex,
-        p.OneToOneConnector(weights=1, delays=5), target="inhibitory2")
+exc_proj = p.Projection(pop_src1, pop_ex,
+        p.OneToOneConnector(weights=1, delays=10), target="excitatory")
+
+exc2_proj = p.Projection(pop_src2, pop_ex,
+        p.OneToOneConnector(weights=1, delays=30), target="excitatory2")
+
+inh_proj = p.Projection(pop_src3, pop_ex,
+        p.OneToOneConnector(weights=1, delays=20), target="inhibitory")
+
+inh2_proj2 = p.Projection(pop_src4, pop_ex,
+        p.OneToOneConnector(weights=1, delays=40), target="inhibitory2")
 
 
 pop_ex.record()

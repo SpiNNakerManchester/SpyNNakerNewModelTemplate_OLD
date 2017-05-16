@@ -12,8 +12,8 @@
 //---------------------------------------
 // Macros
 //---------------------------------------
-#define SYNAPSE_TYPE_BITS 2
-#define SYNAPSE_TYPE_COUNT 4
+#define SYNAPSE_TYPE_BITS 4
+#define SYNAPSE_TYPE_COUNT 10
 
  //---------------------------------------
  // Synapse parameters
