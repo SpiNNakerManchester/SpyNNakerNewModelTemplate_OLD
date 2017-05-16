@@ -1,5 +1,5 @@
 import spynnaker7.pyNN as p
-from python_models.neuron.builds.if_curr_comb_exp_2E2I import IFCurrCombExp2E2I
+from python_models.neuron.builds.if_curr_comb_exp_5E5I import IFCurrCombExp5E5I
 import plot_utils
 p.setup(0.1)
 
@@ -7,7 +7,7 @@ pop_src = p.Population(1, p.SpikeSourceArray, {'spike_times': [[0.1]]}, label="s
 
 #IFCurrCombExp.set_excitatory_scalar()
 
-pop_ex = p.Population(1, IFCurrCombExp2E2I, {}, label="test")
+pop_ex = p.Population(1, IFCurrCombExp5E5I, {}, label="test")
 pop_ex.set(#'v_thresh',[-54.00, -50, -57, -48, -53.2])
 #        'exc_a_response', 0,
 #        'exc_a_A',1,
