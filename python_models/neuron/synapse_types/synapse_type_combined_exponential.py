@@ -11,36 +11,10 @@ from spynnaker.pyNN.models.neural_properties.neural_parameter \
 from data_specification.enums.data_type import DataType
 from enum import Enum
 class _COMB_EXP_TYPES(Enum):
-    #RESPONSE = (1, DataType.S1615)
-    #CONST = (2, DataType.S1615)
-    #DECAY = (3, DataType.UINT32)
-    #INIT = (4, DataType.UINT32)
-
-    E_RESPONSE = (1,  DataType.S1615)
-
-    E_A_RESPONSE = (2, DataType.S1615)
-    E_A_CONST = (3, DataType.S1615)
-    E_A_DECAY = (4, DataType.UINT32)
-    E_A_INIT = (5, DataType.UINT32)
-
-    E_B_RESPONSE = (6, DataType.S1615)
-    E_B_CONST = (7, DataType.S1615)
-    E_B_DECAY = (8, DataType.UINT32)
-    E_B_INIT = (9, DataType.UINT32)
-
-
-    I_RESPONSE = (10,  DataType.S1615)
-
-    I_A_RESPONSE = (11, DataType.S1615)
-    I_A_CONST = (12, DataType.S1615)
-    I_A_DECAY = (13, DataType.UINT32)
-    I_A_INIT = (14, DataType.UINT32)
-
-
-    I_B_RESPONSE = (15, DataType.S1615)
-    I_B_CONST = (16, DataType.S1615)
-    I_B_DECAY = (17, DataType.UINT32)
-    I_B_INIT = (18, DataType.UINT32)
+    RESPONSE = (1, DataType.S1615)
+    CONST = (2, DataType.S1615)
+    DECAY = (3, DataType.UINT32)
+    INIT = (4, DataType.UINT32)
 
     def __new__(cls, value, data_type):
         obj = object.__new__(cls)
@@ -267,29 +241,29 @@ class SynapseTypeCombinedExponential(AbstractSynapseType):
         print "inh: decay = {}, init: {}".format(i_b_decay/float(pow(2, 32)), i_b_init/float(pow(2, 32)))
 
         return [
-            NeuronParameter(self._exc_response, _COMB_EXP_TYPES.E_RESPONSE.data_type),
+            NeuronParameter(self._exc_response, _COMB_EXP_TYPES.RESPONSE.data_type),
 
-            NeuronParameter(self._exc_a_response, _COMB_EXP_TYPES.E_A_RESPONSE.data_type),
-            NeuronParameter(self._exc_a_A, _COMB_EXP_TYPES.E_A_CONST.data_type),
-            NeuronParameter(e_a_decay, _COMB_EXP_TYPES.E_A_DECAY.data_type),
-            NeuronParameter(e_a_init, _COMB_EXP_TYPES.E_A_INIT.data_type),
+            NeuronParameter(self._exc_a_response, _COMB_EXP_TYPES.RESPONSE.data_type),
+            NeuronParameter(self._exc_a_A, _COMB_EXP_TYPES.CONST.data_type),
+            NeuronParameter(e_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
+            NeuronParameter(e_a_init, _COMB_EXP_TYPES.INIT.data_type),
 
-            NeuronParameter(self._exc_b_response, _COMB_EXP_TYPES.E_B_RESPONSE.data_type),
-            NeuronParameter(self._exc_b_B, _COMB_EXP_TYPES.E_B_CONST.data_type),
-            NeuronParameter(e_b_decay, _COMB_EXP_TYPES.E_B_DECAY.data_type),
-            NeuronParameter(e_b_init, _COMB_EXP_TYPES.E_B_INIT.data_type),
+            NeuronParameter(self._exc_b_response, _COMB_EXP_TYPES.RESPONSE.data_type),
+            NeuronParameter(self._exc_b_B, _COMB_EXP_TYPES.CONST.data_type),
+            NeuronParameter(e_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
+            NeuronParameter(e_b_init, _COMB_EXP_TYPES.INIT.data_type),
 
-            NeuronParameter(self._inh_response, _COMB_EXP_TYPES.I_RESPONSE.data_type),
+            NeuronParameter(self._inh_response, _COMB_EXP_TYPES.RESPONSE.data_type),
 
-            NeuronParameter(self._inh_a_response, _COMB_EXP_TYPES.I_A_RESPONSE.data_type),
-            NeuronParameter(self._inh_a_A, _COMB_EXP_TYPES.I_A_CONST.data_type),
-            NeuronParameter(i_a_decay, _COMB_EXP_TYPES.I_A_DECAY.data_type),
-            NeuronParameter(i_a_init, _COMB_EXP_TYPES.I_A_INIT.data_type),
+            NeuronParameter(self._inh_a_response, _COMB_EXP_TYPES.RESPONSE.data_type),
+            NeuronParameter(self._inh_a_A, _COMB_EXP_TYPES.CONST.data_type),
+            NeuronParameter(i_a_decay, _COMB_EXP_TYPES.DECAY.data_type),
+            NeuronParameter(i_a_init, _COMB_EXP_TYPES.INIT.data_type),
 
-            NeuronParameter(self._inh_b_response, _COMB_EXP_TYPES.I_B_RESPONSE.data_type),
-            NeuronParameter(self._inh_b_B, _COMB_EXP_TYPES.I_B_CONST.data_type),
-            NeuronParameter(i_b_decay, _COMB_EXP_TYPES.I_B_DECAY.data_type),
-            NeuronParameter(i_b_init, _COMB_EXP_TYPES.I_B_INIT.data_type),
+            NeuronParameter(self._inh_b_response, _COMB_EXP_TYPES.RESPONSE.data_type),
+            NeuronParameter(self._inh_b_B, _COMB_EXP_TYPES.CONST.data_type),
+            NeuronParameter(i_b_decay, _COMB_EXP_TYPES.DECAY.data_type),
+            NeuronParameter(i_b_init, _COMB_EXP_TYPES.INIT.data_type),
         ]
 
     def get_synapse_type_parameter_types(self):

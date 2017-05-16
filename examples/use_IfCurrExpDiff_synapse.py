@@ -1,6 +1,6 @@
 import spynnaker7.pyNN as p
 from python_models.neuron.builds.if_curr_comb_exp import IFCurrCombExp
-#import plot_utils
+import plot_utils
 p.setup(0.1)
 
 pop_src = p.Population(1, p.SpikeSourceArray, {'spike_times': [[0]]}, label="src1")
@@ -30,8 +30,8 @@ p.run(50)
 v = pop_ex.get_v()
 curr = pop_ex.get_gsyn()
 spikes = pop_ex.getSpikes()
-'''
+
 plot_utils.plotAll(v, spikes)
 plot_utils.plot_gsyn(curr)
-p.end()'''
+p.end()
 print "\n job done"
