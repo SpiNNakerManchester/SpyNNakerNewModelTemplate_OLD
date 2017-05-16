@@ -1,8 +1,8 @@
 from spynnaker.pyNN.models.neuron.neuron_models\
     .neuron_model_leaky_integrate_and_fire \
     import NeuronModelLeakyIntegrateAndFire
-from python_models.neuron.synapse_types.synapse_type_combined_exponential\
-    import SynapseTypeCombinedExponential
+from python_models.neuron.synapse_types.synapse_type_combined_exponential_2E2I\
+    import SynapseTypeCombExp2E2I
 from spynnaker.pyNN.models.neuron.input_types.input_type_current \
     import InputTypeCurrent
 from spynnaker.pyNN.models.neuron.threshold_types.threshold_type_static \
@@ -11,7 +11,7 @@ from spynnaker.pyNN.models.neuron.abstract_population_vertex \
     import AbstractPopulationVertex
 import numpy
 
-class IFCurrCombExp(AbstractPopulationVertex):
+class IFCurrCombExp2E2I(AbstractPopulationVertex):
     """ Leaky integrate and fire neuron with 2 excitatory and 2 inhibitory\
         synapses, each comprised of a combination of exponential functions:\
         synaptic response = Ae^(-t/tau_a) + Be^(-t/tau_b)
@@ -30,11 +30,11 @@ class IFCurrCombExp(AbstractPopulationVertex):
         # excitatory
         'exc_response':0,
         'exc_a_response':0,
-        'exc_a_A':0,
-        'exc_a_tau': 0,
+        'exc_a_A':1,
+        'exc_a_tau': 0.2,
         'exc_b_response':0,
-        'exc_b_B':0,
-        'exc_b_tau': 0,
+        'exc_b_B':-1,
+        'exc_b_tau': 1.7,
         # excitatory2
         'exc2_response':0,
         'exc2_a_response':0,
@@ -54,11 +54,11 @@ class IFCurrCombExp(AbstractPopulationVertex):
         # inhibitory2
         'inh2_response':0,
         'inh2_a_response': 0,
-        'inh2_a_A':0,
-        'inh2_a_tau': 0,
+        'inh2_a_A':1,
+        'inh2_a_tau': 0.4,
         'inh2_b_response':0,
-        'inh2_b_B':0,
-        'inh2_b_tau': 0,
+        'inh2_b_B':-1,
+        'inh2_b_tau': 1.2,
         ##############################
 
         'tau_refrac': 0.1,
@@ -117,7 +117,7 @@ class IFCurrCombExp(AbstractPopulationVertex):
             n_neurons, v_init, v_rest, tau_m, cm, i_offset,
             v_reset, tau_refrac)
 
-        synapse_type = SynapseTypeCombinedExponential(
+        synapse_type = SynapseTypeCombExp2E2I(
                 n_neurons,
 
                 # excitatory
@@ -161,19 +161,19 @@ class IFCurrCombExp(AbstractPopulationVertex):
 
         AbstractPopulationVertex.__init__(
             self, n_neurons=n_neurons, binary="IF_curr_comb_exp_2E2I.aplx", label=label,
-            max_atoms_per_core=IFCurrCombExp._model_based_max_atoms_per_core,
+            max_atoms_per_core=IFCurrCombExp2E2I._model_based_max_atoms_per_core,
             spikes_per_second=spikes_per_second,
             ring_buffer_sigma=ring_buffer_sigma,
             incoming_spike_buffer_size=incoming_spike_buffer_size,
-            model_name="IF_curr_comb_exp", neuron_model=neuron_model,
+            model_name="IF_curr_comb_exp_2E2I", neuron_model=neuron_model,
             input_type=input_type, synapse_type=synapse_type,
             threshold_type=threshold_type, constraints=constraints)
 
     @staticmethod
     def set_model_max_atoms_per_core(new_value):
-        IFCurrExpDiff._model_based_max_atoms_per_core = new_value
+        IFCurrCombExp2E2I._model_based_max_atoms_per_core = new_value
 
     @staticmethod
     def get_max_atoms_per_core():
-        return IFCurrCombExp._model_based_max_atoms_per_core
+        return IFCurrCombExp2E2I._model_based_max_atoms_per_core
 

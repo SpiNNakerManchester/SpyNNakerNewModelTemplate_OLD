@@ -27,7 +27,7 @@ class _COMB_EXP_TYPES(Enum):
         return self._data_type
 
 
-class SynapseTypeCombinedExponential(AbstractSynapseType):
+class SynapseTypeCombExp2E2I(AbstractSynapseType):
 
     def __init__(self,
                 n_neurons,
