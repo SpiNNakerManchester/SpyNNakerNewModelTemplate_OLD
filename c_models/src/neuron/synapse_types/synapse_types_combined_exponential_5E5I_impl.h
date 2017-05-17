@@ -14,6 +14,7 @@
 //---------------------------------------
 #define SYNAPSE_TYPE_BITS 4
 #define SYNAPSE_TYPE_COUNT 10
+#define SYNAPSE_INDEX_BITS 6
 
  //---------------------------------------
  // Synapse parameters

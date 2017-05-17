@@ -18,6 +18,7 @@ class IFCurrCombExp2E2I(AbstractPopulationVertex):
     """
 
     _model_based_max_atoms_per_core = 255
+    _max_feasible_max_atoms_per_core = 64
 
     default_parameters = {
         'tau_m': 20.0,
@@ -167,7 +168,7 @@ class IFCurrCombExp2E2I(AbstractPopulationVertex):
             incoming_spike_buffer_size=incoming_spike_buffer_size,
             model_name="IF_curr_comb_exp_2E2I", neuron_model=neuron_model,
             input_type=input_type, synapse_type=synapse_type,
-            threshold_type=threshold_type, constraints=constraints)
+            threshold_type=threshold_type, constraints=constraints, max_feasible_atoms_per_core=IFCurrCombExp2E2I._max_feasible_max_atoms_per_core)
 
     @staticmethod
     def set_model_max_atoms_per_core(new_value):

@@ -17,7 +17,8 @@ class IFCurrCombExp5E5I(AbstractPopulationVertex):
         synaptic response = Ae^(-t/tau_a) + Be^(-t/tau_b)
     """
 
-    _model_based_max_atoms_per_core = 255
+    _max_feasible_max_atoms_per_core = 64
+    _model_based_max_atoms_per_core = _max_feasible_max_atoms_per_core
 
     default_parameters = {
         'tau_m': 20.0,
@@ -334,7 +335,7 @@ class IFCurrCombExp5E5I(AbstractPopulationVertex):
             incoming_spike_buffer_size=incoming_spike_buffer_size,
             model_name="IF_curr_comb_exp_5E5I", neuron_model=neuron_model,
             input_type=input_type, synapse_type=synapse_type,
-            threshold_type=threshold_type, constraints=constraints)
+            threshold_type=threshold_type, constraints=constraints, max_feasible_atoms_per_core=IFCurrCombExp5E5I._max_feasible_max_atoms_per_core)
 
     @staticmethod
     def set_model_max_atoms_per_core(new_value):
