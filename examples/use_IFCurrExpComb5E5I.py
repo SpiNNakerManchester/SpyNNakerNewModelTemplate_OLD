@@ -22,33 +22,35 @@ pop_ex = p.Population(1, IFCurrCombExp5E5I, {}, label="test")
 # define the projections
 # excitatory
 
+d = 12
+
 exc_proj = p.Projection(pop_src1, pop_ex,
-        p.OneToOneConnector(weights=1, delays=1), target="excitatory")
+        p.OneToOneConnector(weights=1, delays=1*d), target="excitatory")
 exc_proj2 = p.Projection(pop_src2, pop_ex,
-        p.OneToOneConnector(weights=1, delays=10), target="excitatory2")
+        p.OneToOneConnector(weights=1, delays=3*d), target="excitatory2")
 exc_proj3 = p.Projection(pop_src3, pop_ex,
-        p.OneToOneConnector(weights=1, delays=20), target="excitatory3")
+        p.OneToOneConnector(weights=1, delays=5*d), target="excitatory3")
 exc_proj4 = p.Projection(pop_src4, pop_ex,
-        p.OneToOneConnector(weights=1, delays=30), target="excitatory4")
+        p.OneToOneConnector(weights=1, delays=7*d), target="excitatory4")
 exc_proj5 = p.Projection(pop_src5, pop_ex,
-        p.OneToOneConnector(weights=1, delays=40), target="excitatory5")
+        p.OneToOneConnector(weights=1, delays=9*d), target="excitatory5")
 
 inh_proj = p.Projection(pop_src6, pop_ex,
-        p.OneToOneConnector(weights=1, delays=5), target="inhibitory")
+        p.OneToOneConnector(weights=1, delays=2*d), target="inhibitory")
 inh_proj2 = p.Projection(pop_src7, pop_ex,
-        p.OneToOneConnector(weights=1, delays=15), target="inhibitory2")
+        p.OneToOneConnector(weights=1, delays=4*d), target="inhibitory2")
 inh_proj3 = p.Projection(pop_src8, pop_ex,
-        p.OneToOneConnector(weights=1, delays=25), target="inhibitory3")
+        p.OneToOneConnector(weights=1, delays=6*d), target="inhibitory3")
 inh_proj4 = p.Projection(pop_src9, pop_ex,
-        p.OneToOneConnector(weights=1, delays=35), target="inhibitory4")
+        p.OneToOneConnector(weights=1, delays=8*d), target="inhibitory4")
 inh_proj5 = p.Projection(pop_src10, pop_ex,
-        p.OneToOneConnector(weights=1, delays=45), target="inhibitory5")
+        p.OneToOneConnector(weights=1, delays=10*d), target="inhibitory5")
 
 
 pop_ex.record()
 pop_ex.record_gsyn()
 pop_ex.record_v()
-p.run(150)
+p.run(200)
 
 v = pop_ex.get_v()
 curr = pop_ex.get_gsyn()
