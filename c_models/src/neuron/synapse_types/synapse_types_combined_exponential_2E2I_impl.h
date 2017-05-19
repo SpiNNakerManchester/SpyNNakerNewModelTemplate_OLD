@@ -115,6 +115,14 @@
  	parameter->exc2_response = (parameter->exc2_a_A * parameter->exc2_a_response) + (parameter->exc2_b_B * parameter->exc2_b_response);
  	parameter->inh_response = (parameter->inh_a_A * parameter->inh_a_response) + (parameter->inh_b_B * parameter->inh_b_response);
  	parameter->inh2_response = (parameter->inh2_a_A * parameter->inh2_a_response) + (parameter->inh2_b_B * parameter->inh2_b_response);
+
+
+
+ 	log_debug("ex1 = %8.4k, ex2 = %8.4k, inh = %8.4k, inh2 = %8.4k",
+ 			parameter->exc_response,
+			parameter->exc2_response,
+			parameter->inh_response,
+			parameter->inh2_response);
  }
 
  static inline void synapse_types_add_neuron_input(
