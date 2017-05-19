@@ -56,6 +56,7 @@ t_{rise} = ln\frac{B\tau_x}{A\tau_x}(\frac{\tau_x\tau_x}{\tau_x - \tau_x} \\
 f = \frac{1}{e^{-\frac{t_{rise}}{\tau_a}} - e^{-\frac{-t_{rise}}{\tau_b}}}
 \label{eqn:combined_exponential_response}
 \end{eqnarray}
+This allows either cumulative or differential responsese to be obtained.
 \subsubsection*{SpiNNaker Implementation}
 A generic combined exponential synapse is implemented to facilitate exploration of further synapse shapes defined through combinations of exopnential functions. The current $i(t)$ is therefore defined as in Eqn.\ref{eqn:generic_form}.
 \begin{eqnarray}
