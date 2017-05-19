@@ -10,6 +10,21 @@ pop_ex = p.Population(1, IFCurrCombExp5E5I, {}, label="test")
 
 d = 12
 
+#for i in range(5)
+pop_ex.set('exc_a_tau', 0.8)
+pop_ex.set('exc2_b_tau', 3.7)
+pop_ex.set('exc3_b_tau', 4.7)
+pop_ex.set('exc4_a_tau', 1.3)
+pop_ex.set('exc5_b_tau', 0.9)
+
+pop_ex.set('inh_a_tau', 0.1)
+pop_ex.set('inh2_a_tau', 0.7)
+pop_ex.set('inh3_b_tau', 2)
+pop_ex.set('inh4_a_tau', 1.9)
+pop_ex.set('inh5_b_tau', 0.7)
+
+
+
 exc_proj = p.Projection(pop_src, pop_ex,
         p.OneToOneConnector(weights=1, delays=1*d), target="excitatory")
 exc_proj2 = p.Projection(pop_src, pop_ex,
