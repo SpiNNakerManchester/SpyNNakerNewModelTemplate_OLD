@@ -28,19 +28,17 @@ class IFCurrCombExp(AbstractPopulationVertex):
         'exc_response':0,
 
         'exc_a_response':0,
-        'exc_a_A':1,
-        'exc_a_tau': 1.7,
-
+        'exc_a_A':0,
+        'exc_a_tau':1,
         'exc_b_response':0,
-        'exc_b_B':-1,
-        'exc_b_tau': 0.2,
+        'exc_b_B':5,
+        'exc_b_tau': 0,
 
         'inh_response':0,
 
-        'inh_a_response': 0,
+        'inh_a_response':0,
         'inh_a_A':0,
         'inh_a_tau': 0,
-
         'inh_b_response':0,
         'inh_b_B':0,
         'inh_b_tau': 0,
@@ -89,7 +87,7 @@ class IFCurrCombExp(AbstractPopulationVertex):
             v_reset, tau_refrac)
 
 
-        exc_a_A, exc_b_B = self.set_excitatory_scalar(exc_a_tau, exc_b_tau)
+        #exc_a_A, exc_b_B = self.set_excitatory_scalar(exc_a_tau, exc_b_tau)
 
         synapse_type = SynapseTypeCombinedExponential(
                 n_neurons,

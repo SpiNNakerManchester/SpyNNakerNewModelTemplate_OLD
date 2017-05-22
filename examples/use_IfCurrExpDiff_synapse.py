@@ -7,8 +7,8 @@ pop_src = p.Population(1, p.SpikeSourceArray, {'spike_times': [[0]]}, label="src
 
 #IFCurrCombExp.set_excitatory_scalar()
 
-pop_ex = p.Population(1, IFCurrCombExp, {}, label="test")
-#pop_ex = p.Population(1, p.IF_curr_exp, {}, label="test")
+#pop_ex = p.Population(1, IFCurrCombExp, {}, label="test")
+pop_ex = p.Population(1, p.IF_curr_exp, {}, label="test")
 
 
 #tau_a = 1.7
