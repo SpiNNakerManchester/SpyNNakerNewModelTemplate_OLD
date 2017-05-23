@@ -25,20 +25,22 @@ neurons spike, leading to a transfer of current from synaptic binding. The
 neuron behaviour -- such as firing dynamics and threshold -- are typically
 defined by a neuron model: with common implementations including the leaky
 integrate and fire (LIF) ***cite***, or Izhikevich
-\cite{SimpleModelofSpikingNeurons} neurons. These
-essentially govern how and when a neuron will fire, and once fired, the reset
-state. How these neurons are excited and inhibited by others in the network is
-determined by the firing of connected neurons. Upon firing a presynaptic neuron
-will cause binding of the synaptic transmitters, which in turn open ion
-channels, allowing current to flow. This flow of current is fed into the
-post-synaptic neuron, causing a resulting effect in the neuron model.
+\cite{SimpleModelofSpikingNeurons} neurons. These essentially govern how and
+when a neuron will fire, and once fired, the reset state. How these neurons are
+excited and inhibited by others in the network is determined by the firing of
+connected neurons. Upon firing a presynaptic neuron will cause binding of the
+synaptic transmitters, which in turn open ion channels, allowing current to
+flow. This flow of current is fed into the post-synaptic neuron, causing a
+resulting effect in the neuron model.
 
 The time-dependent behaviour of this synaptic response (i.e. what current
 is fed into the post-synaptic neuron) is the subject of the remainder of this
 work: in the following section various synaptic model are introducted, before
 results are presented for comparion and dicussion.
 
-\section{Synapse Modelling}
+\subsection*{Synapse Modelling on SpiNNaker}
+
+\section{Synapse Models}
 Due to the high connectivity between neurons in the brain, sysnapses form a
 major part of neural netowrks. Their number can exceed the number of neurons by
 several orders of magnitude ***cite***, meaning efficient implementation is a
@@ -152,7 +154,7 @@ noting that a larger $\tau$~-~value yields a slower decay function -- results in
 the difference between the two exponential functions shown in Fig.~\ref{fig:difference_exp_example}.
 \begin{figure}[!h]
 \begin{centering}
-\includegraphics[width=0.5\textwidth]{combined_general_difference.ps}
+\includegraphics[width=0.5\textwidth]{figures/combined_general_difference.ps}
 \caption{Example conductance response for combined exponential model}
 \label{fig:difference_exp_example}
 \end{centering}
@@ -186,7 +188,7 @@ Eqn.~\ref{eqn:combined_general_form} are of the same sign, the response in
 Fig.~\ref{fig:combined_exp_example} can be achieved.
  \begin{figure}[!h]
 \begin{centering}
-\includegraphics[width=0.5\textwidth]{combined_general_cumulation.ps}
+\includegraphics[width=0.5\textwidth]{figures/combined_general_cumulation.ps}
 \caption{Example conductance response from summation of two exponential
 components}
 \label{fig:combined_exp_example}
@@ -221,11 +223,13 @@ response shown in Fig.~\ref{fig:biphasic_response}
 \end{figure}
 
 
- \subsubsection*{SpiNNaker Implementation}
+\subsubsection*{SpiNNaker Implementation}
 
-\section{Results}
+\subsection{Error Analysis}
 
 \section{Discussion}
+
+
 \section{Appendix}
 \appendix
 \section{Alpha Response Derivation}
