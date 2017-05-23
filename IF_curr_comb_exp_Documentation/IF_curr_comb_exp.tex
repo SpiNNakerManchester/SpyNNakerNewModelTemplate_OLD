@@ -145,24 +145,45 @@ where $\tau_a$ and $\tau_b$ define two individual time constants. The response
 in Eqn.~\ref{eqn:combined_general_form} faciliates two interesting behaviours
 when the signs of constants $A$ and $B$ are either equal or opposite.
 
-\paragraph{Difference of two exponentials: $A>0, B<0$}
-Setting the coefficients $A = -B = 1$, together with $\tau_a = $
-\
-\begin{eqnarray}
-t_{rise}&=&ln\frac{B\tau_x}{A\tau_x}\frac{\tau_x\tau_x}{\tau_x - \tau_x} \\
-f&=&\Big( e^{-t_{rise} / \tau_a} - e^{-t_{rise} / \tau_b}\Big)^{-1}
-\label{eqn:combined_exponential_response}
-\end{eqnarray}
+\paragraph{Difference of two exponentials: $A>0, B<0$ \newline}
+\noindent Setting the coefficients $A = -B = 1$ and $\tau_a > \tau_b$ --
+noting that a larger $\tau$~-~value yields a slower decay function -- results in
+the difference between the two exponential functions shown in Fig.~\ref{fig:difference_exp_example}.
 \begin{figure}[!h]
 \begin{centering}
 \includegraphics[width=0.5\textwidth]{combined_general_difference.ps}
 \caption{Example conductance response for combined exponential model}
-\label{fig:combined_exp_example}
+\label{fig:difference_exp_example}
 \end{centering}
 \end{figure}
+Upon spiking $t = 0$, resulting in a net conductance of zero. The initial rise
+in conductance is governed by the value of $\tau_a$, with the post-peak response
+dominated by $\tau_b$. Equation.~\ref{eqn:combined_exponential_response} can
+therefore be rewritten with $\tau_a = \tau_{decay}$ and $\tau_b = \tau_{rise}$
+as:
+\begin{equation}
+g_{syn}(t)=\bar{g}_{syn}f\Big(e^{-t / \tau_{decay}} - e^{-t /
+\tau_{rise}}\Big)
+\label{eqn:}
+\end{equation}
+where f is a scalar ensuring $g_{syn} = \bar{g}_{syn}$ at the response peak. It
+follows from stationary point theory that for the case $A = -B = 1$:
+\begin{eqnarray}
+t_{peak}&=&\frac{\tau_{rise}\tau_{decay}}{\tau_{decay}
+- \tau_{rise}}\ln\frac{\tau_{decay}}{\tau_{rise}} \nonumber
+\\
+f&=&\Big( e^{-t_{peak} / \tau_{decay}} - e^{-t_{peak} / \tau_{rise}}\Big)^{-1}
+\nonumber
+\label{eqn:combined_exponential_diff_response}
+\end{eqnarray}
+This synapse model therefore allows tuning of the initial rise and post-peak
+decay to match experimentally observed synapse behaviour.
 
-\paragraph{Cumulation of two exponentials: $A>0, B>0$}
-\begin{figure}[!h]
+\paragraph{Cumulation of two exponentials: $A>0, B>0$ \\}
+\noindent Taking the second case where both coefficients in
+Eqn.~\ref{eqn:combined_general_form} are of the same sign, the response in
+Fig.~\ref{fig:combined_exp_example} can be achieved.
+ \begin{figure}[!h]
 \begin{centering}
 \includegraphics[width=0.5\textwidth]{combined_general_cumulation.ps}
 \caption{Example conductance response from summation of two exponential
@@ -170,36 +191,70 @@ components}
 \label{fig:combined_exp_example}
 \end{centering}
 \end{figure}
+This gives rise to an instantaneous rise, followed by a decay
+response comprised of short and long-term components. Setting $\tau_a > \tau_b$
+results in an initial short-term decay dominated by $\tau_b$ and a long-term
+decay dominated by $\tau_a$. Rewriting Eqn~\ref{eqn:combined_general_form} as:
+\begin{equation}
+g_{syn}(t)=\bar{g}_{syn}f\Big(Ae^{-t / \tau_{long}} + Be^{-t /
+\tau_{short}}\Big)
+\label{eqn:combined_exponential_cumulation_response}
+\end{equation}
 
 \subsubsection*{SpiNNaker Implementation}
-A generic combined exponential synapse is implemented to facilitate exploration
-of further synapse shapes defined through combinations of exopnential
-functions. The conductance $g_{syn}(t)$ is therefore defined as in
-Eqn.\ref{eqn:combined_general_form}.
-
-To give the respone defined in Eqn.~\ref{eqn:combined_exponential_response},
-coefficients are set $A=-B=f$. The response defined in ***cite*** can then be
-repeated by setting $\tau_a = \tau_{rise} = 1.7$ and $\tau_b = \tau_{decay} =
-0.2$. These coefficients give the response shown in Fig.~\ref{fig:typical_response}.
-\begin{figure}
-\caption{Synapse behaviour replicating ***cite***, achieved through combining
-exponetnials according to \ref{eqn:combined_general_form} and setting coefficients
-$A=-B=f$ (where $f$ is calculated according to Eqn.~\ref{eqn:combined_exponential_response}), and $\tau_a = 1.7$ and $\tau_b = 0.2$.}
-\label{fig:typical_response}
-\end{figure}
-Note that Fig.~\ref{fig:typical_response} also shows the two components before
-combining: this shows that for the coefficients given, the early response is
-dominated by the contribution from the first component -- designated
-$\tau_{rise}$ -- with the subsequent response dominated by the second component
--- designated $\tau_{decay}$.
+A generic combined exponential synapse is implemented allowing both profiles
+described above to be defined. This response therefore requires
 
 
 \subsection{Biphasic}
 \subsubsection*{Synaptic Response}
-\subsubsection*{SpiNNaker Implementation}
+As seen in the previous section, combining exponential functions allows
+tailoring of the synaptic response. It is clear that increasing the number of
+exponential terms will further increase this flexibilty, and also allows
+representation of more complex functions. One such example is the biphasic
+response shown in Fig.~\ref{fig:biphasic_response}
+\begin{figure}
+\begin{centering}
+\label{fig:biphasic_response}
+\end{centering}
+\end{figure}
+
+
+ \subsubsection*{SpiNNaker Implementation}
 
 \section{Results}
 
 \section{Discussion}
+\section{Appendix}
+\appendix
+\section{Alpha Response Derivation}
+\begin{eqnarray}
+g_{syn}(t) & = & \bar{g}_{syn}fg(t) \nonumber \\
+\frac{dg}{dt} & = & \frac{1}{\tau_{decay}} (-g + h) \nonumber \\
+\frac{dh}{dt} & = & \frac{1}{\tau_{rise}}(-h) \nonumber
+\label{eqn:alpha_coupled_diff_eqns}
+\end{eqnarray}
+
+Setting $\tau_{rise}=\tau_{decay} = \tau$ and solving for $h(t)$ via separation
+of variables:
+\begin{eqnarray}
+\int \frac{1}{h} dh & = & \int -\frac{1}{\tau}dt \nonumber \\
+\ln{h}&=&-\frac{t}{\tau} + C \nonumber \\
+h(t) & = & e^{-{t/\tau}+C} = ke^{-t / \tau} \nonumber
+\label{eqn:solve_for_h}
+\end{eqnarray}
+Rearranging to the form $\frac{dy}{dt} +Py = Qt$, substituting  for $h(t)$, and
+solving for $g(t)$ by integration via the particular integral (and the reverse
+product rule):
+\begin{eqnarray}
+\frac{dg}{dt} + \frac{g}{\tau}&=&\frac{k}{\tau}e^{-t/\tau} \nonumber\\
+\mathrm{P.I.}&=& e^{\int P dt} = e^{t/ \tau} \nonumber \\
+e^{t/\tau}\frac{dg}{dt} + e^{t/\tau}\frac{g}{\tau}
+&=& \frac{k}{\tau}e^{-t/\tau}e^{t/\tau} \nonumber \\
+\frac{d}{dt} g e^{\frac{t}{\tau}}&=&\frac{k}{\tau}e^{-\frac{t}{\tau}
++\frac{t}{\tau}} \nonumber \\
+g e^{\frac{t}{\tau}} &=& \int \frac{k}{\tau}e^0 dt  =  \frac{kt}{\tau} \nonumber \\
+g(t)&=&\frac{kt}{\tau}e^{-t/\tau}
+\end{eqnarray}
 
 \end{document}
