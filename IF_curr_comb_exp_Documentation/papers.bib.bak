@@ -1,0 +1,75 @@
+% This file was created with JabRef 2.10.
+% Encoding: ISO8859_1
+
+
+@Article{xpap_key,
+  Title                    = {title},
+  Author                   = {auth},
+  Journal                  = {Journal},
+  Year                     = {20},
+
+  Owner                    = {mbassor2},
+  Timestamp                = {2017.05.23}
+}
+
+@Article{SimpleModelofSpikingNeurons,
+  Title                    = {Simple Model of Spiking Neurons},
+  Author                   = {Izhikevich, E. M.},
+  Journal                  = {In Proc IEEE Transactions on Neural Networks},
+  Year                     = {2003},
+  Pages                    = {1569-1572},
+  Volume                   = {14},
+
+  Owner                    = {mbassor2},
+  Timestamp                = {2017.05.23}
+}
+
+@Article{MAD_plasticity,
+  Title                    = {Spike-Timing-Dependent Plasticity in Balanced Random Networks},
+  Author                   = {Morrison, A. Aertsen, A. Diesmann, M.},
+  Journal                  = {Journal of Neural Computation},
+  Year                     = {2007},
+
+  Owner                    = {mbassor2},
+  Timestamp                = {2017.03.31}
+}
+
+@Article{Ponulak_intro_SNN,
+  Title                    = {Introduction to spiking neural networks: Infromation processing, learning and applications},
+  Author                   = {Ponulak, F. Kasinski, A.},
+  Journal                  = {Acta Neurobiologiae Experimentalis},
+  Year                     = {2011},
+
+  Owner                    = {mbassor2},
+  Timestamp                = {2017.03.31}
+}
+
+@Article{LIF_SpiNNaker_neuron_exploration,
+  Title                    = {The Leaky Integrate-and-Fire Neuron: A platform for Synaptic Model Exploration},
+  Author                   = {Rast, A. Galluppi, F. Jin, X. Furber, S. B.},
+  Journal                  = {In proc IEEE World Congress on Computational Intelligence},
+  Year                     = {2010},
+
+  Owner                    = {mbassor2},
+  Timestamp                = {2017.03.31}
+}
+
+@Book{Computational_modelling_methods_for_neuroscientists,
+  Title                    = {Computational Modelling Methods for Neuroscientists},
+  Editor                   = {De Schutter, Erik},
+  Publisher                = {The MIT Press},
+  Year                     = {2010},
+
+  Owner                    = {mbassor2},
+  Timestamp                = {2017.03.31}
+}
+
+@Book{bookkey,
+  Title                    = {title},
+  Publisher                = {publisher},
+  Year                     = {20},
+
+  Owner                    = {mbassor2},
+  Timestamp                = {2017.05.23}
+}
+

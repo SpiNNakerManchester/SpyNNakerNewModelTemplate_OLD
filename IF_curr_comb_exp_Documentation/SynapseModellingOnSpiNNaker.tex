@@ -24,13 +24,14 @@ of the brain. The neurons take input from others in the network when connected
 neurons spike, leading to a transfer of current from synaptic binding. The
 neuron behaviour -- such as firing dynamics and threshold -- are typically
 defined by a neuron model: with common implementations including the leaky
-integrate and fire (LIF) ***cite***, or Izhikevich ***cite*** neurons. These
+integrate and fire (LIF) ***cite***, or Izhikevich
+\cite{SimpleModelofSpikingNeurons} neurons. These
 essentially govern how and when a neuron will fire, and once fired, the reset
-state. How these neurons are excited and inhibited by others in the
-network is determined by the firing of connected neurons. Upon firing a
-presynaptic neuron will cause binding of the synaptic transmitters, which in
-turn open ion channels, allowing current to flow. This flow of current is fed
-into the post-synaptic neuron, causing a resulting effect in the neuron model.
+state. How these neurons are excited and inhibited by others in the network is
+determined by the firing of connected neurons. Upon firing a presynaptic neuron
+will cause binding of the synaptic transmitters, which in turn open ion
+channels, allowing current to flow. This flow of current is fed into the
+post-synaptic neuron, causing a resulting effect in the neuron model.
 
 The time-dependent behaviour of this synaptic response (i.e. what current
 is fed into the post-synaptic neuron) is the subject of the remainder of this
@@ -158,7 +159,7 @@ the difference between the two exponential functions shown in Fig.~\ref{fig:diff
 \end{figure}
 Upon spiking $t = 0$, resulting in a net conductance of zero. The initial rise
 in conductance is governed by the value of $\tau_a$, with the post-peak response
-dominated by $\tau_b$. Equation.~\ref{eqn:combined_exponential_response} can
+dominated by $\tau_b$. Equation.~\ref{eqn:combined_general_form} can
 therefore be rewritten with $\tau_a = \tau_{decay}$ and $\tau_b = \tau_{rise}$
 as:
 \begin{equation}
@@ -232,7 +233,6 @@ response shown in Fig.~\ref{fig:biphasic_response}
 g_{syn}(t) & = & \bar{g}_{syn}fg(t) \nonumber \\
 \frac{dg}{dt} & = & \frac{1}{\tau_{decay}} (-g + h) \nonumber \\
 \frac{dh}{dt} & = & \frac{1}{\tau_{rise}}(-h) \nonumber
-\label{eqn:alpha_coupled_diff_eqns}
 \end{eqnarray}
 
 Setting $\tau_{rise}=\tau_{decay} = \tau$ and solving for $h(t)$ via separation
@@ -241,7 +241,6 @@ of variables:
 \int \frac{1}{h} dh & = & \int -\frac{1}{\tau}dt \nonumber \\
 \ln{h}&=&-\frac{t}{\tau} + C \nonumber \\
 h(t) & = & e^{-{t/\tau}+C} = ke^{-t / \tau} \nonumber
-\label{eqn:solve_for_h}
 \end{eqnarray}
 Rearranging to the form $\frac{dy}{dt} +Py = Qt$, substituting  for $h(t)$, and
 solving for $g(t)$ by integration via the particular integral (and the reverse
@@ -253,8 +252,12 @@ e^{t/\tau}\frac{dg}{dt} + e^{t/\tau}\frac{g}{\tau}
 &=& \frac{k}{\tau}e^{-t/\tau}e^{t/\tau} \nonumber \\
 \frac{d}{dt} g e^{\frac{t}{\tau}}&=&\frac{k}{\tau}e^{-\frac{t}{\tau}
 +\frac{t}{\tau}} \nonumber \\
-g e^{\frac{t}{\tau}} &=& \int \frac{k}{\tau}e^0 dt  =  \frac{kt}{\tau} \nonumber \\
+g e^{\frac{t}{\tau}} &=& \int \frac{k}{\tau}e^0 dt = \frac{kt}{\tau} \nonumber \\
 g(t)&=&\frac{kt}{\tau}e^{-t/\tau}
 \end{eqnarray}
+
+
+\bibliography{papers}
+\bibliographystyle{apalike}
 
 \end{document}
