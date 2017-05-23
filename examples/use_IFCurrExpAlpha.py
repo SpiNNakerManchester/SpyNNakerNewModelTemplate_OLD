@@ -13,8 +13,6 @@ pop_ex = p.Population(1, IFCurrExpAlpha, {}, label="test")
 exc_proj = p.Projection(pop_src1, pop_ex,
         p.OneToOneConnector(weights=1, delays=1), target="excitatory")
 
-
-
 pop_ex.record()
 pop_ex.record_gsyn()
 pop_ex.record_v()
