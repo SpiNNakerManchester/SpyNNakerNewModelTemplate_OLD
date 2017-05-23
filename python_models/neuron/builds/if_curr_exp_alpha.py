@@ -31,7 +31,7 @@ class IFCurrExpAlpha(AbstractPopulationVertex):
         'exc_const_response':0,
         'exc_k':1,
         'exc_t':0.0,
-        'exc_tau':0.2,
+        'exc_tau':2,
         'inh_response':0,
         'inh_exp_response':0,
         'inh_const_response':0,

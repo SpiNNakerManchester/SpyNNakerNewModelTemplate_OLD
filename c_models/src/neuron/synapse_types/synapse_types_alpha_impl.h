@@ -59,14 +59,12 @@ static inline void synapse_types_shape_input(synapse_param_pointer_t parameter){
 			parameter->exc_exp_response,
 			parameter->exc_decay);
 
-	parameter->exc_const_response = parameter->exc_const_response +
-					(parameter->exc_k
+	parameter->exc_const_response =  parameter->exc_k
 					  * parameter->exc_t
-					  * parameter->exc_tau_inv);
+					  * parameter->exc_tau_inv;
 
 	parameter->exc_response = parameter->exc_exp_response * parameter->exc_const_response;
 
-	// Inhibitory
 	parameter->exc_t += parameter->dt;
 
 }
@@ -78,8 +76,7 @@ static inline void synapse_types_add_neuron_input(
 
 	if (synapse_type_index == EXCITATORY) {
 		parameter->exc_exp_response = parameter->exc_exp_response + decay_s1615(
-				input,
-				parameter->exc_init);
+				input,	parameter->exc_init);
 		if (input > 0.1){
 			parameter->exc_t = 0;
 		}
