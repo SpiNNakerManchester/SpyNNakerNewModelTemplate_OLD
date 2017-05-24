@@ -62,6 +62,14 @@ class MyAdditionalInput(AbstractAdditionalInput):
                 self._my_additional_input_parameter, DataType.S1615),
         ]
 
+    def get_parameter_types(self):
+        """ Get the parameter types for the additional input
+
+        :return: An array of parameter types
+        """
+        #TODO: update the parameter types
+        return [item.data_type for item in DataType]
+
     def get_n_cpu_cycles_per_neuron(self):
         """ Get the number of CPU cycles executed by\
             additional_input_get_input_value_as_current and\

@@ -1,6 +1,10 @@
 #ifndef _MY_TIMING_H_
 #define _MY_TIMING_H_
 
+// These need to be defined before including any synapse stuff
+#define SYNAPSE_TYPE_BITS 1
+#define SYNAPSE_TYPE_COUNT 2
+
 // TODO: Add any variables to be stored in the post trace structure
 typedef struct post_trace_t {
 } post_trace_t;
@@ -9,19 +13,22 @@ typedef struct post_trace_t {
 typedef struct pre_trace_t {
 } pre_trace_t;
 
+// weight_state_t has been (re?)defined in my_weight_impl.h, needs to be included here
+#include "../weight_dependence/my_weight_impl.h"
+
+// Include generic plasticity maths functions
+#include <neuron/plasticity/common/maths.h>
+
+// TODO: Ensure the correct number of weight terms is chosen
+#include <neuron/plasticity/stdp/weight_dependence/weight_one_term.h>
+
 // TODO: Choose the required synapse structure
 #include <neuron/plasticity/stdp/synapse_structure/synapse_structure_weight_impl.h>
 
 #include <neuron/plasticity/stdp/timing_dependence/timing.h>
 
-// TODO: Ensure the correct number of weight terms is chosen
-#include <neuron/plasticity/stdp/weight_dependence/weight_one_term.h>
-
 // Include debug header for log_info etc
 #include <debug.h>
-
-// Include generic plasticity maths functions
-#include <neuron/plasticity/common/maths.h>
 
 // Note the parameters will be external
 extern accum my_potentiation_parameter;

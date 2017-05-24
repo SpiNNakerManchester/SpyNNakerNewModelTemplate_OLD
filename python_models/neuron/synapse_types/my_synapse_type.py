@@ -60,6 +60,11 @@ class MySynapseType(AbstractSynapseType):
             NeuronParameter(self._my_in_synapse_parameter, DataType.S1615),
         ]
 
+    def get_synapse_type_parameter_types(self):
+
+        # TODO: update to return the parameter types
+        return [item.data_type for item in DataType]
+
     def get_n_cpu_cycles_per_neuron(self):
 
         # TODO: update to match the number of cycles used by
