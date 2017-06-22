@@ -5,7 +5,7 @@ from spynnaker.pyNN.models.neuron.neuron_models.abstract_neuron_model \
     import AbstractNeuronModel
 from spynnaker.pyNN.utilities import utility_calls
 
-from data_specification.enums.data_type import DataType
+from data_specification.enums import DataType
 
 
 class MyNeuronModel(AbstractNeuronModel):
